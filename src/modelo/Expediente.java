@@ -12,9 +12,10 @@ public class Expediente {
     private Integer nro;
     private Integer año;
     private String causa;
-    private ArrayList<Elemento> elementos = new ArrayList<Elemento>(); 
+    private ArrayList<Elemento> elementos = new ArrayList<Elemento>();
+    private ArrayList<Tramite> tramites = new ArrayList<Tramite>();
 
-    public Expediente(Integer nro, Integer año, String causa, ArrayList<Elemento> elementos) {
+    public Expediente(Integer nro, Integer año, String causa, ArrayList<Elemento> elementos, ArrayList<Tramite> tramites) {
         this.nro = nro;
         this.año = año;
         this.causa = causa;

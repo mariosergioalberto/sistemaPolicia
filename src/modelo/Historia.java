@@ -32,7 +32,5 @@ public class Historia {
         return historia;
     }
     
-    
-    
-    
+   
 }

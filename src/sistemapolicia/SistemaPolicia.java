@@ -1,17 +1,17 @@
 
 package sistemapolicia;
 
-/**
- *
- * @author Laboratio
- */
-public class SistemaPolicia {
+import vista.Principal;
 
-    /**
-     * @param args the command line arguments
-     */
+
+public class SistemaPolicia {
+    
     public static void main(String[] args) {
-        // TODO code application logic here
+        
+        Principal principal = new Principal();
+        
+       principal.Ejecutar();
+        
     }
     
 }

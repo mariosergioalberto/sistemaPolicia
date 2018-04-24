@@ -12,13 +12,15 @@ public class Oficina {
     private String direccion;
     private Integer nroDireccion;
     private String descripcion;
+    private Integer tipo;
 
-    public Oficina(Integer id, String nombre, String direccion, Integer nroDireccion, String descripcion) {
+    public Oficina(Integer id, String nombre, String direccion, Integer nroDireccion, String descripcion, Integer tipo) {
         this.id = id;
         this.nombre = nombre;
         this.direccion = direccion;
         this.nroDireccion = nroDireccion;
         this.descripcion = descripcion;
+        this.tipo = tipo;
     }
 
     public void setId(Integer id) {
@@ -62,7 +64,13 @@ public class Oficina {
     }
     
     
+    public void setTipo(Integer tipo){
+        this.tipo = tipo;
+    }
     
+    public Integer getTipo(){
+        return tipo;
+    }
    
     
 }
