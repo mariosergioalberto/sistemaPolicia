@@ -7,14 +7,16 @@ import java.util.ArrayList;
  *
  * @author Laboratio
  */
-public class Sumario {
+public class Sumario extends Expediente{
     
     private Integer nroSumario;
     private Integer año;
     private ArrayList<Oficio> oficios = new ArrayList<Oficio>();
     private ArrayList<Nota> notas = new ArrayList<Nota>();
 
-    public Sumario(Integer nroSumario, Integer año) {
+    public Sumario(Integer nroSumario, Integer año, String causa,String descripcion, ArrayList<Elemento> elementos, ArrayList<Tramite> tramites) {
+        
+        super(causa,descripcion,elementos,tramites);
         this.nroSumario = nroSumario;
         this.año = año;
     }
@@ -33,6 +35,22 @@ public class Sumario {
 
     public Integer getAño() {
         return año;
+    }
+
+    public void setOficios(ArrayList<Oficio> oficios) {
+        this.oficios = oficios;
+    }
+
+    public void setNotas(ArrayList<Nota> notas) {
+        this.notas = notas;
+    }
+
+    public ArrayList<Oficio> getOficios() {
+        return oficios;
+    }
+
+    public ArrayList<Nota> getNotas() {
+        return notas;
     }
     
     

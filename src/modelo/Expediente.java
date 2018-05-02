@@ -9,16 +9,18 @@ import java.util.ArrayList;
  */
 public class Expediente {
     
-    private Integer nro;
-    private Integer año;
+    
+    
     private String causa;
+    private String descripcion;
     private ArrayList<Elemento> elementos = new ArrayList<Elemento>();
     private ArrayList<Tramite> tramites = new ArrayList<Tramite>();
 
-    public Expediente(Integer nro, Integer año, String causa, ArrayList<Elemento> elementos, ArrayList<Tramite> tramites) {
-        this.nro = nro;
-        this.año = año;
+    public Expediente(String causa, String descripcion,  ArrayList<Elemento> elementos, ArrayList<Tramite> tramites) {
+        
+        
         this.causa = causa;
+        this.descripcion = descripcion;
     }
 
     public ArrayList<Elemento> getElementos() {
@@ -29,28 +31,33 @@ public class Expediente {
         this.elementos = elementos;
     }
 
-    public Integer getNro() {
-        return nro;
-    }
+    
 
-    public Integer getAño() {
-        return año;
-    }
+  
 
     public String getCausa() {
         return causa;
     }
 
-    public void setNro(Integer nro) {
-        this.nro = nro;
-    }
-
-    public void setAño(Integer año) {
-        this.año = año;
-    }
-
+  
     public void setCausa(String causa) {
         this.causa = causa;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public void setTramites(ArrayList<Tramite> tramites) {
+        this.tramites = tramites;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public ArrayList<Tramite> getTramites() {
+        return tramites;
     }
     
    

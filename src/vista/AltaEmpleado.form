@@ -78,12 +78,14 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="textField2" min="-2" pref="160" max="-2" attributes="0"/>
-                  <Component id="textField5" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                      <Component id="jButton2" min="-2" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="jComboBox1" alignment="0" max="32767" attributes="0"/>
-                          <Component id="textField6" alignment="0" pref="98" max="32767" attributes="0"/>
+                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="textField5" alignment="0" max="32767" attributes="0"/>
+                      <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                          <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="jComboBox1" alignment="0" max="32767" attributes="0"/>
+                              <Component id="textField6" alignment="0" pref="98" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
               </Group>
@@ -162,9 +164,6 @@
       </Properties>
     </Component>
     <Component class="java.awt.TextField" name="textField3">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="textField3"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
@@ -172,9 +171,6 @@
       </Properties>
     </Component>
     <Component class="java.awt.TextField" name="textField4">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="textField4"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
@@ -182,9 +178,6 @@
       </Properties>
     </Component>
     <Component class="java.awt.TextField" name="textField5">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="textField5"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
       <Properties>
@@ -192,9 +185,6 @@
       </Properties>
     </Component>
     <Component class="java.awt.TextField" name="textField6">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="textField6"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
       <Properties>
@@ -202,9 +192,6 @@
       </Properties>
     </Component>
     <Component class="java.awt.TextField" name="textField7">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="textField7"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel8">
       <Properties>
@@ -232,9 +219,6 @@
       </Properties>
     </Component>
     <Component class="java.awt.TextField" name="textField8">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="textField8"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>
