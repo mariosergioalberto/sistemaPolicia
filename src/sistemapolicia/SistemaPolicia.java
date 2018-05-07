@@ -22,8 +22,8 @@ public class SistemaPolicia {
             con.conectar();
             
             Principal principal = new Principal();
-            ControladorFramePrincipal control = new ControladorFramePrincipal(principal);
-            principal.Ejecutar();
+            ControladorFramePrincipal control = new ControladorFramePrincipal();
+        
             
            
         } catch (SQLException ex) {

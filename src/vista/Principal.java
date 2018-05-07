@@ -17,6 +17,8 @@ public class Principal extends javax.swing.JFrame {
     
     public void setControlador(ControladorFramePrincipal control){
         
+        mItem_personal.addActionListener(control);
+        mItem_tramites.addActionListener(control);
         
     }
      
