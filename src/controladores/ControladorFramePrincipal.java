@@ -5,6 +5,7 @@ import static java.awt.SystemColor.control;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import modelo.Empleado;
+import persistencia.Conector;
 import vista.AltaEmpleado;
 import vista.Principal;
 
@@ -12,17 +13,19 @@ import vista.Principal;
 public class ControladorFramePrincipal implements ActionListener {
     
   private Principal pantallaPrincipal;
+  
+  private ControladorFrameTipoTramite controladorFrameTipoTramite;
   private ControladorFrameAltaEmpleado controladorAltaEmpleado;
   
+  private Conector con;
   
-  public ControladorFramePrincipal(){
+  
+  public ControladorFramePrincipal(Conector con){//El controlador se encarga de crear las pantallas y asignar el controlador
       
       this.pantallaPrincipal = new Principal();
       pantallaPrincipal.setControlador(this);
       pantallaPrincipal.Ejecutar();
-      
-      
-  
+      this.con = con;
   }
   
   
@@ -31,7 +34,12 @@ public class ControladorFramePrincipal implements ActionListener {
     public void actionPerformed(ActionEvent e) {
        if(e.getActionCommand().equals(pantallaPrincipal.MENUITEM_EMPLEADOS)){
            System.out.println("Prueba de evento...");
-          controladorAltaEmpleado = new ControladorFrameAltaEmpleado();
+          controladorAltaEmpleado = new ControladorFrameAltaEmpleado(con);
+          }
+       
+       if(e.getActionCommand().equals(pantallaPrincipal.MENUITEM_TRAMITES)){
+           controladorFrameTipoTramite = new ControladorFrameTipoTramite(con);
+           
           }
        
        

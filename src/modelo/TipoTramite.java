@@ -14,6 +14,10 @@ public class TipoTramite {
         this.id = id;
         this.descripcion = descripcion;
     }
+    
+    public TipoTramite(){
+        
+    }
 
     public Integer getId() {
         return id;

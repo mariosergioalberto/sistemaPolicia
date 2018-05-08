@@ -8,11 +8,13 @@ public class Principal extends javax.swing.JFrame {
     public static final String BTN_BUSCAREXPEDIENTE = "BUSCAR_EXPEDIENTES";
     
     public static final String MENUITEM_EMPLEADOS = "ALTA_EMPLEADOS";
-
+    public static final String MENUITEM_TRAMITES = "ALTA_TRAMITES";
+    
+    
     public Principal() {
         initComponents();
         mItem_personal.setActionCommand(MENUITEM_EMPLEADOS);
-        
+        mItem_tramites.setActionCommand(MENUITEM_TRAMITES);
     }
     
     public void setControlador(ControladorFramePrincipal control){

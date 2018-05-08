@@ -22,7 +22,7 @@ public class SistemaPolicia {
             con.conectar();
             
             Principal principal = new Principal();
-            ControladorFramePrincipal control = new ControladorFramePrincipal();
+            ControladorFramePrincipal control = new ControladorFramePrincipal(con);
         
             
            
