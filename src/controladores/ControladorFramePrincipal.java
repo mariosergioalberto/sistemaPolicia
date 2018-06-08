@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import modelo.Empleado;
 import persistencia.Conector;
+import persistencia.MySqlConexion;
 import vista.AltaEmpleado;
 import vista.Principal;
 
@@ -17,10 +18,10 @@ public class ControladorFramePrincipal implements ActionListener {
   private ControladorFrameTipoTramite controladorFrameTipoTramite;
   private ControladorFrameAltaEmpleado controladorAltaEmpleado;
   
-  private Conector con;
+  private MySqlConexion con;
   
   
-  public ControladorFramePrincipal(Conector con){//El controlador se encarga de crear las pantallas y asignar el controlador
+  public ControladorFramePrincipal(MySqlConexion con){//El controlador se encarga de crear las pantallas y asignar el controlador
       
       this.pantallaPrincipal = new Principal();
       pantallaPrincipal.setControlador(this);

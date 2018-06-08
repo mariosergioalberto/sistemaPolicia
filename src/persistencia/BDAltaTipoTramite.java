@@ -6,40 +6,38 @@ import java.sql.SQLException;
 import modelo.TipoTramite;
 
 
-
-/**
- *
- * @author Laboratio
- */
 public class BDAltaTipoTramite {
     
     private TipoTramite tipoTramite;
-    private Conector con;
+    private MySqlConexion con, conec;
+    
     
     private String consulta;
     
-    public BDAltaTipoTramite(Conector con){
+    public BDAltaTipoTramite(TipoTramite tramite){
         this.con = con;
+        this.tipoTramite = tramite;
         
     }
     
-   
-    
-    public void AltaTipoTramite(TipoTramite tipoTramite) throws SQLException{
+    public void AltaTipoTramite() throws SQLException, ClassNotFoundException{
         
-      
+        conec = new MySqlConexion();
+        
+        conec.conectar();
+        
         
         consulta = "INSERT INTO `tipotramite` "
-                + "(`idTipoTramite,`descripcion`) "
-                + "VALUES (NULL,"+tipoTramite.getDescripcion()+")";
+                + "(`idTipoTramite`,`descripcion`) "
+                + "VALUES (NULL,'"+this.tipoTramite.getDescripcion()+"');";
         
         
-        PreparedStatement st = con.getConexion().prepareStatement(consulta);
+        System.out.println(consulta);
+        
+        PreparedStatement st = this.conec.getConexion().prepareStatement(consulta);
         st.execute();
         
        
     }
-    
-    
-    
+   
 }

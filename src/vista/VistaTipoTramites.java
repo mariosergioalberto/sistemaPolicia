@@ -2,6 +2,7 @@
 package vista;
 
 import controladores.ControladorFrameTipoTramite;
+import javax.swing.JTable;
 
 public class VistaTipoTramites extends javax.swing.JFrame {
 
@@ -32,24 +33,32 @@ public class VistaTipoTramites extends javax.swing.JFrame {
 
     public void Ejecutar(){
         this.setVisible(true);
+        this.setLocationRelativeTo(null);
     }
     
+    public void SetTablaTipoTramite(JTable tablaTipoTramites){
+        tablaTipoTramites = tablaTramites;
+    }
+    
+    public JTable getTablaTipoTramite(){
+        return tablaTramites;
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaTramites = new javax.swing.JTable();
         btn_seleccionar = new javax.swing.JButton();
         btn_cancelar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         btn_agregar = new javax.swing.JButton();
         btn_modificar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaTramites.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -74,10 +83,10 @@ public class VistaTipoTramites extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
+        jScrollPane1.setViewportView(tablaTramites);
+        if (tablaTramites.getColumnModel().getColumnCount() > 0) {
+            tablaTramites.getColumnModel().getColumn(0).setResizable(false);
+            tablaTramites.getColumnModel().getColumn(1).setResizable(false);
         }
 
         btn_seleccionar.setText("Seleccionar");
@@ -91,7 +100,7 @@ public class VistaTipoTramites extends javax.swing.JFrame {
         });
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel2.setText("Tipos de Tramitas/Trabajos");
+        jLabel2.setText("Tipos de Tramites/Trabajos");
 
         btn_agregar.setText("Agregar");
 
@@ -141,9 +150,7 @@ public class VistaTipoTramites extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
-      
-        this.dispose();
-        
+          this.dispose();
     }//GEN-LAST:event_btn_cancelarActionPerformed
 
   
@@ -156,6 +163,6 @@ public class VistaTipoTramites extends javax.swing.JFrame {
     private javax.swing.JButton btn_seleccionar;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tablaTramites;
     // End of variables declaration//GEN-END:variables
 }

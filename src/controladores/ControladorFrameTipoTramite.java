@@ -4,6 +4,7 @@ package controladores;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import persistencia.Conector;
+import persistencia.MySqlConexion;
 import vista.VistaTipoTramites;
 
 
@@ -15,10 +16,10 @@ public class ControladorFrameTipoTramite implements ActionListener{
     
    VistaTipoTramites vistaTipoTramite;
    ControladorFrameAltaTramite controladorFrameAltaTramite;
-   Conector con;
+    MySqlConexion con;
     
     
-    public ControladorFrameTipoTramite(Conector con){
+    public ControladorFrameTipoTramite(MySqlConexion con){
         
         this.vistaTipoTramite = new VistaTipoTramites();
         vistaTipoTramite.setControlador(this);
@@ -32,7 +33,7 @@ public class ControladorFrameTipoTramite implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals(vistaTipoTramite.BTN_AGREGAR)) {
             
-            controladorFrameAltaTramite = new ControladorFrameAltaTramite(con);
+            controladorFrameAltaTramite = new ControladorFrameAltaTramite(vistaTipoTramite,con);
             
         }
     }
