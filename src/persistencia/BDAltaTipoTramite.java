@@ -37,7 +37,7 @@ public class BDAltaTipoTramite {
         PreparedStatement st = this.conec.getConexion().prepareStatement(consulta);
         st.execute();
         
-       
+       conec.cerrarConexion();
     }
    
 }

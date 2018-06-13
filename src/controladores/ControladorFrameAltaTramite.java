@@ -63,6 +63,8 @@ public class ControladorFrameAltaTramite implements ActionListener {
 
         this.bdAltaTramite = new BDAltaTipoTramite(tramite);
         this.bdAltaTramite.AltaTipoTramite();
+        
+        
 
     }
 

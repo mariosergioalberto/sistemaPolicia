@@ -4,6 +4,9 @@ package controladores;
 import static java.awt.SystemColor.control;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modelo.Empleado;
 import persistencia.Conector;
 import persistencia.MySqlConexion;
@@ -39,7 +42,13 @@ public class ControladorFramePrincipal implements ActionListener {
           }
        
        if(e.getActionCommand().equals(pantallaPrincipal.MENUITEM_TRAMITES)){
-           controladorFrameTipoTramite = new ControladorFrameTipoTramite(con);
+           try {
+               controladorFrameTipoTramite = new ControladorFrameTipoTramite(con);
+           } catch (SQLException ex) {
+               Logger.getLogger(ControladorFramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+           } catch (ClassNotFoundException ex) {
+               Logger.getLogger(ControladorFramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+           }
            
           }
        

@@ -3,6 +3,12 @@ package controladores;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
+import persistencia.BDMostrarListaTiposTramites;
 import persistencia.Conector;
 import persistencia.MySqlConexion;
 import vista.VistaTipoTramites;
@@ -19,16 +25,16 @@ public class ControladorFrameTipoTramite implements ActionListener{
     MySqlConexion con;
     
     
-    public ControladorFrameTipoTramite(MySqlConexion con){
+    public ControladorFrameTipoTramite(MySqlConexion con) throws SQLException, ClassNotFoundException{
         
         this.vistaTipoTramite = new VistaTipoTramites();
         vistaTipoTramite.setControlador(this);
-        vistaTipoTramite.Ejecutar();
+        
+        mostrarListaTipoTramite(vistaTipoTramite.getTablaTipoTramite());
         this.con = con;
+        vistaTipoTramite.Ejecutar();
     }
     
-    
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals(vistaTipoTramite.BTN_AGREGAR)) {
@@ -36,6 +42,38 @@ public class ControladorFrameTipoTramite implements ActionListener{
             controladorFrameAltaTramite = new ControladorFrameAltaTramite(vistaTipoTramite,con);
             
         }
+    }
+    
+    public void mostrarListaTipoTramite(JTable tablaTipoTramites) throws SQLException, ClassNotFoundException{
+        
+        
+        BDMostrarListaTiposTramites lista = new BDMostrarListaTiposTramites();
+        
+        DefaultTableModel tabla = new DefaultTableModel();
+        
+        String titulos[] = {"Id","Descripcion"};
+        
+        tabla.setColumnIdentifiers(titulos);
+        tablaTipoTramites.setModel(tabla);
+        
+        String registro[] = new String[2];
+        
+        ResultSet listaTiposTramites = lista.RSListaTipoTramites();
+        
+        
+        TableColumnModel columnModel = tablaTipoTramites.getColumnModel();
+         columnModel.getColumn(0).setPreferredWidth(50);
+       columnModel.getColumn(1).setPreferredWidth(310);
+        
+        
+        while(listaTiposTramites.next()){
+            registro[0] = String.valueOf(listaTiposTramites.getInt("idTipoTramite"));
+            registro[1] = listaTiposTramites.getString("descripcion");
+            tabla.addRow(registro);
+        }
+        
+        lista.cerrarCon();
+        
     }
     
 }

@@ -22,14 +22,11 @@ public class ControladorFrameAltaEmpleado implements ActionListener{
         
     }
 
-  
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals(vistaAltaEmpleado.BTN_AGREGAR)) {
             
         }
     }
-    
-    
-    
+        
 }

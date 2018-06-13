@@ -75,6 +75,8 @@ public abstract class Conector {
     public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
+
+    
     
     
 }

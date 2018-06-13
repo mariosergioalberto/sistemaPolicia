@@ -3,6 +3,9 @@ package vista;
 
 import controladores.ControladorFrameTipoTramite;
 import javax.swing.JTable;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 
 public class VistaTipoTramites extends javax.swing.JFrame {
 
@@ -20,6 +23,11 @@ public class VistaTipoTramites extends javax.swing.JFrame {
         btn_cancelar.setActionCommand(BTN_CANCELAR);
         btn_seleccionar.setActionCommand(BTN_SELECCIONAR);
         btn_modificar.setActionCommand(BTN_MODIFICAR);
+        
+        
+        TableColumnModel columnModel = tablaTramites.getColumnModel();
+        columnModel.getColumn(0).setPreferredWidth(10);
+        columnModel.getColumn(1).setPreferredWidth(100);
         
     }
     
@@ -58,6 +66,11 @@ public class VistaTipoTramites extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        tablaTramites = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         tablaTramites.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -83,11 +96,11 @@ public class VistaTipoTramites extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tablaTramites.setToolTipText("");
+        tablaTramites.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        tablaTramites.getTableHeader().setResizingAllowed(false);
+        tablaTramites.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tablaTramites);
-        if (tablaTramites.getColumnModel().getColumnCount() > 0) {
-            tablaTramites.getColumnModel().getColumn(0).setResizable(false);
-            tablaTramites.getColumnModel().getColumn(1).setResizable(false);
-        }
 
         btn_seleccionar.setText("Seleccionar");
         btn_seleccionar.setEnabled(false);
@@ -154,8 +167,6 @@ public class VistaTipoTramites extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_cancelarActionPerformed
 
   
-  
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_agregar;
     private javax.swing.JButton btn_cancelar;
