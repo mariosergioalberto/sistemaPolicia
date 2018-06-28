@@ -94,9 +94,7 @@ public class AltaTipoTramite extends javax.swing.JDialog {
     }
     
     public void Ejecutar() {
-        this.setVisible(true);
-        
-        
+        this.setVisible(true);        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -11,14 +11,44 @@ public class Empleado {
     private String nombre;
     private String apellido;
     private Integer dni; 
-    private Fecha fechaNac;
+    private String fechaNac;
+    private String direccion;
+    private Integer nroDireccion;
+    private String rango;
 
-    public Empleado(Integer legajo, String nombre, String apellido, Integer dni, Fecha fechaNac) {
+    public Empleado(Integer legajo, String nombre, String apellido, Integer dni, String fechaNac, String direccion, Integer nroDireccion, String rango) {
         this.legajo = legajo;
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
         this.fechaNac = fechaNac;
+        this.direccion = direccion;
+        this.nroDireccion = nroDireccion;
+        this.rango = rango;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public Integer getNroDireccion() {
+        return nroDireccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public void setNroDireccion(Integer nroDireccion) {
+        this.nroDireccion = nroDireccion;
+    }
+
+    public String getRango() {
+        return rango;
+    }
+
+    public void setRango(String rango) {
+        this.rango = rango;
     }
 
     public void setLegajo(Integer legajo) {
@@ -41,7 +71,7 @@ public class Empleado {
         return dni;
     }
 
-    public Fecha getFechaNac() {
+    public String getFechaNac() {
         return fechaNac;
     }
 
@@ -57,12 +87,8 @@ public class Empleado {
         this.dni = dni;
     }
 
-    public void setFechaNac(Fecha fechaNac) {
+    public void setFechaNac(String fechaNac) {
         this.fechaNac = fechaNac;
     }
-    
-    
-    
-    
-    
+       
 }

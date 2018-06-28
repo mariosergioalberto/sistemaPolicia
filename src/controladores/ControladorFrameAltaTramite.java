@@ -2,14 +2,14 @@ package controladores;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.PreparedStatement;
+
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.TipoTramite;
-import modelo.Tramite;
+
 import persistencia.BDAltaTipoTramite;
-import persistencia.Conector;
+
 import persistencia.MySqlConexion;
 import vista.AltaTipoTramite;
 import vista.VistaTipoTramites;
@@ -21,7 +21,7 @@ import vista.VistaTipoTramites;
 public class ControladorFrameAltaTramite implements ActionListener {
 
     private AltaTipoTramite vistaAltaTipoTramite;
-    private VistaTipoTramites vistaTipoTramites;
+    
     private TipoTramite tramite;
     private BDAltaTipoTramite bdAltaTramite;
     private MySqlConexion con;
@@ -54,7 +54,7 @@ public class ControladorFrameAltaTramite implements ActionListener {
 
     }
 
-    //=========================================Obtener datos de la vista====================================
+    //=========================================Obtener datos de la vista y agregarlo a la BD====================================
     public void Vista_a_Modelo() throws SQLException, ClassNotFoundException {
 
         this.tramite = new TipoTramite();

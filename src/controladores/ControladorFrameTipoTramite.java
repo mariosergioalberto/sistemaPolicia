@@ -44,6 +44,12 @@ public class ControladorFrameTipoTramite implements ActionListener{
         }
     }
     
+    
+    //=====================================================================================================
+    
+    
+    
+    
     public void mostrarListaTipoTramite(JTable tablaTipoTramites) throws SQLException, ClassNotFoundException{
         
         
@@ -60,10 +66,10 @@ public class ControladorFrameTipoTramite implements ActionListener{
         
         ResultSet listaTiposTramites = lista.RSListaTipoTramites();
         
-        
+        //===================== Cambiar el ancho de la columna=======================
         TableColumnModel columnModel = tablaTipoTramites.getColumnModel();
          columnModel.getColumn(0).setPreferredWidth(50);
-       columnModel.getColumn(1).setPreferredWidth(310);
+         columnModel.getColumn(1).setPreferredWidth(310);
         
         
         while(listaTiposTramites.next()){

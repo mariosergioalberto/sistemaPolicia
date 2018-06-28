@@ -1,16 +1,15 @@
 
 package controladores;
 
-import static java.awt.SystemColor.control;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import modelo.Empleado;
-import persistencia.Conector;
+
 import persistencia.MySqlConexion;
-import vista.AltaEmpleado;
+
 import vista.Principal;
 
 
@@ -19,7 +18,7 @@ public class ControladorFramePrincipal implements ActionListener {
   private Principal pantallaPrincipal;
   
   private ControladorFrameTipoTramite controladorFrameTipoTramite;
-  private ControladorFrameAltaEmpleado controladorAltaEmpleado;
+  private ControladorFrameListaEmpleados controladorFrameListaEmpleado;
   
   private MySqlConexion con;
   
@@ -32,13 +31,11 @@ public class ControladorFramePrincipal implements ActionListener {
       this.con = con;
   }
   
-  
-
     @Override
     public void actionPerformed(ActionEvent e) {
        if(e.getActionCommand().equals(pantallaPrincipal.MENUITEM_EMPLEADOS)){
            System.out.println("Prueba de evento...");
-          controladorAltaEmpleado = new ControladorFrameAltaEmpleado(con);
+          controladorFrameListaEmpleado = new ControladorFrameListaEmpleados(con);
           }
        
        if(e.getActionCommand().equals(pantallaPrincipal.MENUITEM_TRAMITES)){
@@ -50,10 +47,7 @@ public class ControladorFramePrincipal implements ActionListener {
                Logger.getLogger(ControladorFramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
            }
            
-          }
-       
-       
-        
+          }      
     }  
    
 }
