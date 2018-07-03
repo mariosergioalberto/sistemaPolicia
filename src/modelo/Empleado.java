@@ -16,7 +16,7 @@ public class Empleado {
     private Integer nroDireccion;
     private String rango;
 
-    public Empleado(Integer legajo, String nombre, String apellido, Integer dni, String fechaNac, String direccion, Integer nroDireccion, String rango) {
+    public Empleado(Integer legajo, String nombre, String apellido, Integer dni, String fechaNac, String direccion, String rango) {
         this.legajo = legajo;
         this.nombre = nombre;
         this.apellido = apellido;

@@ -3,7 +3,11 @@ package controladores;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modelo.Empleado;
+import persistencia.BDAltaEmpleado;
 
 import persistencia.MySqlConexion;
 
@@ -17,6 +21,8 @@ public class ControladorFrameAltaEmpleado implements ActionListener{
     private VistaListaEmpleado vistaListaEmpleado;
     private MySqlConexion con;
     
+    private BDAltaEmpleado altaempleado;
+    
     public ControladorFrameAltaEmpleado(VistaListaEmpleado vistaListaEmpleado,MySqlConexion con){
         
        this.vistaAltaEmpleado = new VistaAltaEmpleado(vistaListaEmpleado,true);
@@ -29,7 +35,14 @@ public class ControladorFrameAltaEmpleado implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals(vistaAltaEmpleado.BTN_AGREGAR_EMPLEADO)) {
-           AgregarEmpleado();
+            try {
+                AgregarEmpleado();
+            } catch (SQLException ex) {
+                Logger.getLogger(ControladorFrameAltaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(ControladorFrameAltaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           
         }
     }
     
@@ -37,19 +50,23 @@ public class ControladorFrameAltaEmpleado implements ActionListener{
     
     //=====================================================================
     
-    public void AgregarEmpleado(){
+    public void AgregarEmpleado() throws SQLException, ClassNotFoundException{
         Integer legajo = vistaAltaEmpleado.getLegajo();
         String nombre = vistaAltaEmpleado.getNombre();
         String apellido = vistaAltaEmpleado.getApellido();
         Integer dni = vistaAltaEmpleado.getDni();
         String fechaNac = vistaAltaEmpleado.getFecha();
         String direccion = vistaAltaEmpleado.getDireccion();
-        Integer numerDir = vistaAltaEmpleado.getNumerDir();
-        String rango = "Agente";
-        
-        this.empleado = new Empleado(legajo,nombre,apellido,dni,fechaNac,direccion,numerDir,rango);
+        String rango = vistaAltaEmpleado.getRango();
         
         
+        
+        this.empleado = new Empleado(legajo,nombre,apellido,dni,fechaNac,direccion,rango);
+        
+        altaempleado = new BDAltaEmpleado(empleado);
+        
+        altaempleado.AgregarEmpleado();
+        ///
     }
         
 }
