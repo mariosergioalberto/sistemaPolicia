@@ -63,9 +63,9 @@ public class ControladorFrameAltaEmpleado implements ActionListener{
         
         this.empleado = new Empleado(legajo,nombre,apellido,dni,fechaNac,direccion,rango);
         
-        altaempleado = new BDAltaEmpleado(empleado);
+        altaempleado = new BDAltaEmpleado();
         
-        altaempleado.AgregarEmpleado();
+        altaempleado.AgregarEmpleado(empleado);
         ///
     }
         

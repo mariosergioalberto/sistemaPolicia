@@ -11,14 +11,14 @@ public class BDAltaEmpleado {
     private Empleado empleado;
     private MySqlConexion conec;
      
-    public BDAltaEmpleado(Empleado empleado){
+    public BDAltaEmpleado(){
        
         this.conec = conec;
         this.empleado = empleado;
     }
     
-   public void AgregarEmpleado() throws SQLException, ClassNotFoundException{
-       
+   public void AgregarEmpleado(Empleado empleado) throws SQLException, ClassNotFoundException{
+       this.empleado = empleado;
        String consultaPersona;
        String consultaEmpleado;
        String consultaID;
@@ -55,10 +55,11 @@ public class BDAltaEmpleado {
         }
 
        consultaEmpleado = "INSERT INTO `empleado` "
-                +"(`idEmpleado`,`legajo`,`Persona_idPersona`) "
+                +"(`idEmpleado`,`legajo`,`Persona_idPersona`,`rango`) "
                 + "VALUES (NULL,"
                 + "'"+this.empleado.getLegajo()+"',"
-                +id+")";
+                +id+","
+                +"'"+this.empleado.getRango()+"')";
 
        PreparedStatement st2 = this.conec.getConexion().prepareStatement(consultaEmpleado);
        st2.execute();

@@ -13,7 +13,9 @@ public class Persona {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
+        this.fechaNac = fechaNac;
         this.direccion = direccion;
+        
     }
 
     public void setNombre(String nombre) {

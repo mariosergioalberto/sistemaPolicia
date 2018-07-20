@@ -9,7 +9,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import modelo.Persona;
 import persistencia.BDMostrarListaEmpleados;
-import persistencia.Conector;
+
 import persistencia.MySqlConexion;
 import vista.VistaListaEmpleado;
 
@@ -34,6 +34,7 @@ public class ControladorFrameListaEmpleados implements ActionListener{
         
         if(e.getActionCommand().equals(vistaListaEmpleado.BTN_AGREGAR_EMP)){
            this.controladorAltaEmpleado = new ControladorFrameAltaEmpleado(vistaListaEmpleado, con);
+          System.out.println("Prueba.................................................");
         }
         
     }
@@ -50,7 +51,7 @@ public class ControladorFrameListaEmpleados implements ActionListener{
         
         
         DefaultTableModel modelo = new DefaultTableModel();
-        String titulos[] = {"idPersona","idEmpleado","legajo","Nombre","Apellido","dni","fecnac","direccion","Rango"};
+        String titulos[] = {"idPersona","idEmpleado","legajo","Nombre","Apellido","dni","Fecha nacim","direccion","Rango"};
         modelo.setColumnIdentifiers(titulos);
         jtableEmpleados.setModel(modelo);
         
