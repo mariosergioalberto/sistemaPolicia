@@ -19,6 +19,7 @@ public class ControladorFramePrincipal implements ActionListener {
   
   private ControladorFrameTipoTramite controladorFrameTipoTramite;
   private ControladorFrameListaEmpleados controladorFrameListaEmpleado;
+  private ControladorFrameListaOficina controladorframelistaoficina;
   
   private MySqlConexion con;
   
@@ -35,7 +36,13 @@ public class ControladorFramePrincipal implements ActionListener {
     public void actionPerformed(ActionEvent e) {
        if(e.getActionCommand().equals(pantallaPrincipal.MENUITEM_EMPLEADOS)){
            System.out.println("Prueba de evento...");
-          controladorFrameListaEmpleado = new ControladorFrameListaEmpleados(con);
+           try {
+               controladorFrameListaEmpleado = new ControladorFrameListaEmpleados(con);
+           } catch (SQLException ex) {
+               Logger.getLogger(ControladorFramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+           } catch (ClassNotFoundException ex) {
+               Logger.getLogger(ControladorFramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+           }
           }
        
        if(e.getActionCommand().equals(pantallaPrincipal.MENUITEM_TRAMITES)){
@@ -47,7 +54,17 @@ public class ControladorFramePrincipal implements ActionListener {
                Logger.getLogger(ControladorFramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
            }
            
-          }      
+          }
+       
+       if(e.getActionCommand().equals(pantallaPrincipal.MENUITEM_OFICINAS)){
+           try {
+               controladorframelistaoficina = new ControladorFrameListaOficina(con);
+           } catch (SQLException ex) {
+               Logger.getLogger(ControladorFramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+           } catch (ClassNotFoundException ex) {
+               Logger.getLogger(ControladorFramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+           }
+       }
     }  
    
 }

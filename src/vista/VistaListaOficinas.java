@@ -1,7 +1,7 @@
 
 package vista;
 
-import controladores.ControladorFrameListaEmpleados;
+import controladores.ControladorFrameListaOficina;
 import javax.swing.JTable;
 
 
@@ -11,9 +11,10 @@ public class VistaListaOficinas extends javax.swing.JFrame {
     public VistaListaOficinas() {
         initComponents();
         btn_agregar.setActionCommand(BTN_AGREGAR);
+        this.setLocationRelativeTo(null);
     }
 
-     public void setControlador(ControladorFrameListaEmpleados controlador){
+     public void setControlador(ControladorFrameListaOficina controlador){
         btn_agregar.addActionListener(controlador);
     }
     
@@ -25,8 +26,8 @@ public class VistaListaOficinas extends javax.swing.JFrame {
         return jTableOficinas;
     }
 
-    public void setJTableEmpleados(JTable tablaEmpleados) {
-        this.jTableOficinas = tablaEmpleados;
+    public void setJTableEmpleados(JTable tablaOficinas) {
+        this.jTableOficinas = tablaOficinas;
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
