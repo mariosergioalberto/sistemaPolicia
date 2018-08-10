@@ -17,6 +17,7 @@ public class Principal extends javax.swing.JFrame {
         mItem_personal.setActionCommand(MENUITEM_EMPLEADOS);
         mItem_tramites.setActionCommand(MENUITEM_TRAMITES);
         mItem_Oficinas.setActionCommand(MENUITEM_OFICINAS);
+        boton_altaExpediente.setActionCommand(BTN_ALTAEXPEDIENTE);
     }
     
     public void setControlador(ControladorFramePrincipal control){
@@ -24,6 +25,7 @@ public class Principal extends javax.swing.JFrame {
         mItem_personal.addActionListener(control);
         mItem_tramites.addActionListener(control);
         mItem_Oficinas.addActionListener(control);
+        boton_altaExpediente.addActionListener(control);
     }
      
     public void Ejecutar(){
