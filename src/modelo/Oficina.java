@@ -11,16 +11,18 @@ public class Oficina {
     private String nombre;
     private String direccion;
     private Integer nroDireccion;
-    private String descripcion;
-    private Integer tipo;
+   
+    
 
     public Oficina(Integer id, String nombre, String direccion, Integer nroDireccion, String descripcion, Integer tipo) {
         this.id = id;
         this.nombre = nombre;
         this.direccion = direccion;
         this.nroDireccion = nroDireccion;
-        this.descripcion = descripcion;
-        this.tipo = tipo;
+       
+    }
+    public Oficina(){
+        
     }
 
     public void setId(Integer id) {
@@ -39,9 +41,7 @@ public class Oficina {
         this.nroDireccion = nroDireccion;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
+    
 
     public Integer getId() {
         return id;
@@ -59,18 +59,10 @@ public class Oficina {
         return nroDireccion;
     }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
+  
     
     
-    public void setTipo(Integer tipo){
-        this.tipo = tipo;
-    }
-    
-    public Integer getTipo(){
-        return tipo;
-    }
+   
    
     
 }

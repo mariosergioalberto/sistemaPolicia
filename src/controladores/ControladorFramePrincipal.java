@@ -19,6 +19,7 @@ public class ControladorFramePrincipal implements ActionListener {
   
   private ControladorFrameTipoTramite controladorFrameTipoTramite;
   private ControladorFrameListaEmpleados controladorFrameListaEmpleado;
+  private ControladorFrameListaOficina controladorframelistaoficina;
   
   private MySqlConexion con;
   
@@ -53,7 +54,17 @@ public class ControladorFramePrincipal implements ActionListener {
                Logger.getLogger(ControladorFramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
            }
            
-          }      
+          }
+       
+       if(e.getActionCommand().equals(pantallaPrincipal.MENUITEM_OFICINAS)){
+           try {
+               controladorframelistaoficina = new ControladorFrameListaOficina(con);
+           } catch (SQLException ex) {
+               Logger.getLogger(ControladorFramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+           } catch (ClassNotFoundException ex) {
+               Logger.getLogger(ControladorFramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+           }
+       }
     }  
    
 }

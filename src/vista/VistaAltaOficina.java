@@ -2,6 +2,7 @@
 package vista;
 
 import controladores.ControladorFrameAltaEmpleado;
+import controladores.ControladorFrameAltaOficina;
 
 /**
  *
@@ -18,7 +19,7 @@ public class VistaAltaOficina extends javax.swing.JDialog {
         this.setLocationRelativeTo(null);
     }
 
-    public void setControlador(ControladorFrameAltaEmpleado control){
+    public void setControlador(ControladorFrameAltaOficina control){
         btn_agregar.addActionListener(control);
     }
     
@@ -51,6 +52,12 @@ public class VistaAltaOficina extends javax.swing.JDialog {
         return Integer.parseInt(nroTexto.getText());
     }
     
+    public void limpiar(){
+        direccionTexto.setText("");
+        nombreTexto.setText("");
+        nroTexto.setText("");
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -72,19 +79,18 @@ public class VistaAltaOficina extends javax.swing.JDialog {
 
         jLabel2.setText("Nombre:");
 
-        nombreTexto.setText("jTextField1");
-
         jLabel4.setText("Direccion:");
-
-        direccionTexto.setText("jTextField3");
 
         btn_agregar.setText("Agregar");
 
         jButton2.setText("Volver");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Numero:");
-
-        nroTexto.setText("jTextField4");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -105,24 +111,24 @@ public class VistaAltaOficina extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(nroTexto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(nombreTexto)))
+                                .addComponent(nroTexto))
+                            .addComponent(nombreTexto, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btn_agregar)))
                 .addGap(21, 21, 21))
             .addGroup(layout.createSequentialGroup()
-                .addGap(188, 188, 188)
+                .addGap(174, 174, 174)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
                 .addGap(18, 18, 18)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(nombreTexto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -143,6 +149,10 @@ public class VistaAltaOficina extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
    
 

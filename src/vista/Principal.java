@@ -9,19 +9,21 @@ public class Principal extends javax.swing.JFrame {
     
     public static final String MENUITEM_EMPLEADOS = "ALTA_EMPLEADOS";
     public static final String MENUITEM_TRAMITES = "ALTA_TRAMITES";
+    public static final String MENUITEM_OFICINAS = "OFICINAS";
     
     
     public Principal() {
         initComponents();
         mItem_personal.setActionCommand(MENUITEM_EMPLEADOS);
         mItem_tramites.setActionCommand(MENUITEM_TRAMITES);
+        mItem_Oficinas.setActionCommand(MENUITEM_OFICINAS);
     }
     
     public void setControlador(ControladorFramePrincipal control){
         
         mItem_personal.addActionListener(control);
         mItem_tramites.addActionListener(control);
-        
+        mItem_Oficinas.addActionListener(control);
     }
      
     public void Ejecutar(){
@@ -40,6 +42,7 @@ public class Principal extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         mItem_personal = new javax.swing.JMenuItem();
         mItem_tramites = new javax.swing.JMenuItem();
+        mItem_Oficinas = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -57,6 +60,9 @@ public class Principal extends javax.swing.JFrame {
 
         mItem_tramites.setText("Tramites");
         jMenu1.add(mItem_tramites);
+
+        mItem_Oficinas.setText("Oficinas");
+        jMenu1.add(mItem_Oficinas);
 
         jMenuBar1.add(jMenu1);
 
@@ -103,6 +109,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem mItem_Oficinas;
     private javax.swing.JMenuItem mItem_personal;
     private javax.swing.JMenuItem mItem_tramites;
     // End of variables declaration//GEN-END:variables

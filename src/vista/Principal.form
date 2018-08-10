@@ -19,6 +19,11 @@
                 <Property name="text" type="java.lang.String" value="Tramites"/>
               </Properties>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mItem_Oficinas">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Oficinas"/>
+              </Properties>
+            </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu2">
