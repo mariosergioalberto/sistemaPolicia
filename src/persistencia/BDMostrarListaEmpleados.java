@@ -11,12 +11,13 @@ import modelo.Persona;
 public class BDMostrarListaEmpleados {
     private MySqlConexion con;
     
-    public BDMostrarListaEmpleados(){
+    public BDMostrarListaEmpleados(MySqlConexion con){
+       this.con = con;
         
     }
     
     public ResultSet RSListaEmpleados() throws SQLException, ClassNotFoundException{
-        con = new MySqlConexion();
+        //con = new MySqlConexion();
         con.conectar();
         ResultSet empleados = null;
         

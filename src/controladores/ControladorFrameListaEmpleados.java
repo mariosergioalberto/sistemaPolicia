@@ -46,7 +46,7 @@ public class ControladorFrameListaEmpleados implements ActionListener{
         con = new MySqlConexion();
         con.conectar();
         
-        bdmostrarEpleados = new BDMostrarListaEmpleados();
+        bdmostrarEpleados = new BDMostrarListaEmpleados(con);
         
         
         
@@ -73,7 +73,7 @@ public class ControladorFrameListaEmpleados implements ActionListener{
             registro[8] = empleados.getString("rango");
             modelo.addRow(registro);
         }
-        con.getConexion().close();
+        //con.getConexion().close();
     }
     
     

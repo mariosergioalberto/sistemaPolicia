@@ -72,6 +72,8 @@ public class ControladorFramePrincipal implements ActionListener {
                controladorframealtaexpediente = new ControladorFrameAltaExpediente(con);
            } catch (SQLException ex) {
                Logger.getLogger(ControladorFramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+           } catch (ClassNotFoundException ex) {
+               Logger.getLogger(ControladorFramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
            }
            
        }

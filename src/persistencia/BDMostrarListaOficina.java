@@ -25,6 +25,7 @@ public class BDMostrarListaOficina {
         PreparedStatement st = con.getConexion().prepareStatement("SELECT * FROM oficina");
         oficinas = st.executeQuery();
         
+        
         return oficinas;
         
         
