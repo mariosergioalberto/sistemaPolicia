@@ -21,11 +21,13 @@ public class ControladorFrameAltaOficina implements ActionListener{
     private BDAltaOficina bdAltaOficina;
     
     public ControladorFrameAltaOficina(VistaListaOficinas vistalistaoficina,MySqlConexion con){
+        
+        this.con = con;
         this.vistaaltaoficina = new VistaAltaOficina(vistalistaoficina, true);
         this.vistaaltaoficina.setControlador(this);
         this.vistaaltaoficina.ejecutar();
         
-        this.con = con;
+        
     }
 
     @Override
@@ -49,8 +51,8 @@ public class ControladorFrameAltaOficina implements ActionListener{
        this.oficina.setNombre(vistaaltaoficina.getNombre());
        this.oficina.setDireccion(vistaaltaoficina.getDireccion());
        
-       this.bdAltaOficina = new BDAltaOficina(oficina);
-       this.bdAltaOficina.AgregarOficina();
+       this.bdAltaOficina = new BDAltaOficina(con);
+       this.bdAltaOficina.AgregarOficina(oficina);
           
     }
     

@@ -12,23 +12,23 @@ public class BDAltaOficina {
     private Oficina oficina;
     private MySqlConexion con;
     
-    public BDAltaOficina(Oficina oficina){
-     this.oficina = oficina;
-     //this.con = con;
+    public BDAltaOficina(MySqlConexion con){
+     this.con = con;
+     
     }
     
-    public void AgregarOficina() throws SQLException, ClassNotFoundException{
-        con = new MySqlConexion();
+    public void AgregarOficina(Oficina oficina) throws SQLException, ClassNotFoundException{
         
-        con.conectar();
+        
+        this.con.conectar();
         
         String consulta;
         
         consulta = "INSERT INTO `oficina` "
                 +"(`idOficina`,`nombre`,`direccion`) "
                 + "VALUES (NULL,"
-                + "'"+this.oficina.getNombre()+"',"
-                + "'"+this.oficina.getDireccion()+"')";
+                + "'"+oficina.getNombre()+"',"
+                + "'"+oficina.getDireccion()+"')";
         
         
         PreparedStatement st = this.con.getConexion().prepareStatement(consulta);

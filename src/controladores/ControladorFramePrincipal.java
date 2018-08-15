@@ -25,12 +25,12 @@ public class ControladorFramePrincipal implements ActionListener {
   private MySqlConexion con;
   
   
-  public ControladorFramePrincipal(MySqlConexion con){//El controlador se encarga de crear las pantallas y asignar el controlador
+  public ControladorFramePrincipal(){//El controlador se encarga de crear las pantallas y asignar el controlador
       
       this.pantallaPrincipal = new Principal();
       pantallaPrincipal.setControlador(this);
       pantallaPrincipal.Ejecutar();
-      this.con = con;
+      this.con = new MySqlConexion();
   }
   
     @Override

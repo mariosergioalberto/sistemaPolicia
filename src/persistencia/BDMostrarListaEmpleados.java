@@ -17,8 +17,8 @@ public class BDMostrarListaEmpleados {
     }
     
     public ResultSet RSListaEmpleados() throws SQLException, ClassNotFoundException{
-        //con = new MySqlConexion();
-        con.conectar();
+        
+        
         ResultSet empleados = null;
         
         PreparedStatement st = con.getConexion().prepareStatement("SELECT * FROM empleado");
@@ -44,7 +44,5 @@ public class BDMostrarListaEmpleados {
     }
     
     
-    public void cerrarCon(){
-        con.cerrarConexion();
-    }
+   
 }

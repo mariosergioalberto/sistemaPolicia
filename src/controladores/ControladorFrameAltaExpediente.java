@@ -36,17 +36,22 @@ public class ControladorFrameAltaExpediente implements ActionListener{
         obtenerOficinas();
         obtenerEmpleados();
         asignarFechaHoy();
+        obtenerTiposTramites();
         
     }
     
-    
+     @Override
+    public void actionPerformed(ActionEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
    
     
     
-    public void obtenerOficinas() throws SQLException{
-        System.out.println("Metodo obtener oficina funciona");
+    public void obtenerOficinas() throws SQLException, ClassNotFoundException{
+        
         ArrayList<String> oficinas = new ArrayList<String>();
         rsListaOficinas = new BDMostrarListaOficina();
+        this.con.conectar();
         ResultSet rs = rsListaOficinas.RSListaOficinas(con);
         
         while(rs.next()){
@@ -61,6 +66,7 @@ public class ControladorFrameAltaExpediente implements ActionListener{
     
     public void obtenerEmpleados() throws SQLException, ClassNotFoundException{
         ArrayList<String> empleados = new ArrayList<String>();
+        this.con.conectar();
         rsListaEmpleados = new BDMostrarListaEmpleados(con);
         
         ResultSet rs = rsListaEmpleados.RSListaEmpleados();
@@ -75,6 +81,7 @@ public class ControladorFrameAltaExpediente implements ActionListener{
         
     }
     
+  
     public void asignarFechaHoy(){
         fechahoy = new Date();
         SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy"); 
@@ -84,18 +91,16 @@ public class ControladorFrameAltaExpediente implements ActionListener{
     public void obtenerTiposTramites() throws SQLException, ClassNotFoundException{
         ArrayList<String> tiposTramites = new ArrayList<String>();
         rslistaTiposTramites = new BDMostrarListaTiposTramites();
-        ResultSet rs = rslistaTiposTramites.RSListaTipoTramites();
+        this.con.conectar();
+        ResultSet rs = rslistaTiposTramites.RSListaTipoTramites(con);
         while(rs.next()){
             tiposTramites.add(rs.getString("descripcion"));
         }
         
         con.cerrarConexion();
-        vistaaltaexpediente.setComboTipoExpediente();
+        vistaaltaexpediente.setComboTipoTramite(tiposTramites);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent ae) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+   
     
 }

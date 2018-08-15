@@ -43,8 +43,8 @@ public class ControladorFrameListaEmpleados implements ActionListener{
     // Metodo para modelar la tabla y mostrar la lista de empleados
     
     public void listarEmpleados(JTable jtableEmpleados) throws SQLException, ClassNotFoundException{
-        con = new MySqlConexion();
-        con.conectar();
+        
+        this.con.conectar();
         
         bdmostrarEpleados = new BDMostrarListaEmpleados(con);
         
@@ -73,7 +73,7 @@ public class ControladorFrameListaEmpleados implements ActionListener{
             registro[8] = empleados.getString("rango");
             modelo.addRow(registro);
         }
-        //con.getConexion().close();
+        this.con.cerrarConexion();
     }
     
     

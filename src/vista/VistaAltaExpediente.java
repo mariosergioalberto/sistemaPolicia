@@ -20,6 +20,7 @@ public class VistaAltaExpediente extends javax.swing.JFrame {
         comboOrigenOficina.removeAllItems();
         comboDestinoOficina.removeAllItems();      
         comboResponsable.removeAllItems();
+        comboTipoTramite.removeAllItems();
       
     }
 

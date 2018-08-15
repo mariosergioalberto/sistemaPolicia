@@ -19,9 +19,9 @@ public class BDMostrarListaTiposTramites {
         
     }
     
-    public ResultSet RSListaTipoTramites() throws SQLException, ClassNotFoundException{
-        con = new MySqlConexion();
-        con.conectar();
+    public ResultSet RSListaTipoTramites(MySqlConexion con) throws SQLException, ClassNotFoundException{
+        
+        
         ResultSet tiposTramites = null;
         
         PreparedStatement st = con.getConexion().prepareStatement("SELECT * FROM tipotramite");
@@ -31,8 +31,6 @@ public class BDMostrarListaTiposTramites {
         return tiposTramites;
     }
 
-    public void cerrarCon() {
-        con.cerrarConexion();
-    }
+  
     
 }

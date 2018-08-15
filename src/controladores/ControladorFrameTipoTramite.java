@@ -29,9 +29,10 @@ public class ControladorFrameTipoTramite implements ActionListener{
         
         this.vistaTipoTramite = new VistaTipoTramites();
         vistaTipoTramite.setControlador(this);
+        this.con = con;
         
         mostrarListaTipoTramite(vistaTipoTramite.getTablaTipoTramite());
-        this.con = con;
+        
         vistaTipoTramite.Ejecutar();
     }
     
@@ -51,7 +52,7 @@ public class ControladorFrameTipoTramite implements ActionListener{
     
     
     public void mostrarListaTipoTramite(JTable tablaTipoTramites) throws SQLException, ClassNotFoundException{
-        
+        this.con.conectar();
         
         BDMostrarListaTiposTramites lista = new BDMostrarListaTiposTramites();
         
@@ -64,7 +65,7 @@ public class ControladorFrameTipoTramite implements ActionListener{
         
         String registro[] = new String[2];
         
-        ResultSet listaTiposTramites = lista.RSListaTipoTramites();
+        ResultSet listaTiposTramites = lista.RSListaTipoTramites(con);
         
         //===================== Cambiar el ancho de la columna=======================
         TableColumnModel columnModel = tablaTipoTramites.getColumnModel();
@@ -78,7 +79,7 @@ public class ControladorFrameTipoTramite implements ActionListener{
             tabla.addRow(registro);
         }
         
-        lista.cerrarCon();
+       this.con.cerrarConexion();
         
     }
     

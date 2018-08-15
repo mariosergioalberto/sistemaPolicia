@@ -24,9 +24,10 @@ public class ControladorFrameListaOficina implements ActionListener{
     public ControladorFrameListaOficina(MySqlConexion con) throws SQLException, ClassNotFoundException{
             this.vistalistaoficinas = new VistaListaOficinas();
             this.vistalistaoficinas.setControlador(this);
+            this.con = con;
             
             mostrarListaOficinas(vistalistaoficinas.getJTableEmpleados());
-            this.con = con;
+            
             this.vistalistaoficinas.ejecutar();
             }
     
@@ -38,8 +39,8 @@ public class ControladorFrameListaOficina implements ActionListener{
     }
     
     public void mostrarListaOficinas(JTable JTableOficinas) throws SQLException, ClassNotFoundException{
-        con = new MySqlConexion();
-        con.conectar();
+        
+        this.con.conectar();
         BDoficina = new BDMostrarListaOficina();
         DefaultTableModel modelo = new DefaultTableModel();
         String titulos[] = {"Nombre","Direccion","Numero"
@@ -58,7 +59,7 @@ public class ControladorFrameListaOficina implements ActionListener{
             modelo.addRow(registro);
             
         }
-        con.getConexion().close();
+        con.cerrarConexion();
     }
     
 }

@@ -24,11 +24,11 @@ public class ControladorFrameAltaEmpleado implements ActionListener{
     private BDAltaEmpleado altaempleado;
     
     public ControladorFrameAltaEmpleado(VistaListaEmpleado vistaListaEmpleado,MySqlConexion con){
-        
+       this.con = con; 
        this.vistaAltaEmpleado = new VistaAltaEmpleado(vistaListaEmpleado,true);
        this.vistaAltaEmpleado.setControlador(this);
        vistaAltaEmpleado.ejecutar();
-       this.con = con;
+       
         
     }
 
@@ -63,10 +63,10 @@ public class ControladorFrameAltaEmpleado implements ActionListener{
         
         this.empleado = new Empleado(legajo,nombre,apellido,dni,fechaNac,direccion,rango);
         
-        altaempleado = new BDAltaEmpleado();
+        altaempleado = new BDAltaEmpleado(con);
         
         altaempleado.AgregarEmpleado(empleado);
-        ///
+      
     }
         
 }

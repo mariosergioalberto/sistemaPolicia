@@ -11,7 +11,7 @@ public class BDAltaEmpleado {
     private Empleado empleado;
     private MySqlConexion conec;
      
-    public BDAltaEmpleado(){
+    public BDAltaEmpleado(MySqlConexion conec){
        
         this.conec = conec;
         this.empleado = empleado;
@@ -23,9 +23,9 @@ public class BDAltaEmpleado {
        String consultaEmpleado;
        String consultaID;
        
-       conec = new MySqlConexion();
+       
         
-       conec.conectar();
+       this.conec.conectar();
         
        consultaPersona = "INSERT INTO `persona` "
                 +"(`idPersona`,`nombre`,`apellido`,`dni`,`fecnac`,`direccion`) "

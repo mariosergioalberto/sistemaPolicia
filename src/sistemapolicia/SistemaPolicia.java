@@ -14,23 +14,23 @@ public class SistemaPolicia {
     public static void main(String[] args) {
         
         
-            MySqlConexion con = new MySqlConexion();
+            //MySqlConexion con = new MySqlConexion();
             System.out.println("Iniciando aplicacion...");
             
             
-         try {   
-            con.conectar();
-            
+//         try {   
+//            con.conectar();
+//            
             Principal principal = new Principal();
-            ControladorFramePrincipal control = new ControladorFramePrincipal(con);
+            ControladorFramePrincipal control = new ControladorFramePrincipal();
         
             
-           
-        } catch (SQLException ex) {
-            Logger.getLogger(SistemaPolicia.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(SistemaPolicia.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//           
+//        } catch (SQLException ex) {
+//            Logger.getLogger(SistemaPolicia.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (ClassNotFoundException ex) {
+//            Logger.getLogger(SistemaPolicia.class.getName()).log(Level.SEVERE, null, ex);
+//        }
         
     }
     
