@@ -506,8 +506,6 @@ public class VistaAltaExpediente extends javax.swing.JFrame {
 
         jLabel10.setText("Tipo:");
 
-        comboTipoTramite.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Transcripcion Camara Gesell", "Transcripcion de audio", "Rastreo", "Captura y digitalizacion de imagen" }));
-
         jButton4.setText("Agregar");
 
         tablaTiposDeTramites.setModel(new javax.swing.table.DefaultTableModel(
