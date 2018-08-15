@@ -3,12 +3,12 @@ package vista;
 
 import controladores.ControladorFrameAltaTramite;
 
-public class AltaTipoTramite extends javax.swing.JDialog {
+public class AltaTipoElemento extends javax.swing.JDialog {
 
     public static String BTN_AGREGAR = "BOTON AGREGAR";
     
     
-    public AltaTipoTramite(java.awt.Frame parent, boolean modal) {
+    public AltaTipoElemento(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         btn_agregar.setActionCommand(BTN_AGREGAR);
@@ -45,14 +45,14 @@ public class AltaTipoTramite extends javax.swing.JDialog {
 
         btn_agregar.setText("Agregar");
 
-        jLabel2.setText("Nuevo Tipo de Tramite");
+        jLabel2.setText("Nuevo Tipo de Elemento");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(40, Short.MAX_VALUE)
+                .addContainerGap(41, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton3)

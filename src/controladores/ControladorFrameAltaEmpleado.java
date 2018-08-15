@@ -45,9 +45,7 @@ public class ControladorFrameAltaEmpleado implements ActionListener{
            
         }
     }
-    
-    
-    
+ 
     //=====================================================================
     
     public void AgregarEmpleado() throws SQLException, ClassNotFoundException{
@@ -58,9 +56,7 @@ public class ControladorFrameAltaEmpleado implements ActionListener{
         String fechaNac = vistaAltaEmpleado.getFecha();
         String direccion = vistaAltaEmpleado.getDireccion();
         String rango = vistaAltaEmpleado.getRango();
-        
-        
-        
+ 
         this.empleado = new Empleado(legajo,nombre,apellido,dni,fechaNac,direccion,rango);
         
         altaempleado = new BDAltaEmpleado(con);

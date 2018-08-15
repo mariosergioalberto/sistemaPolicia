@@ -1,6 +1,7 @@
 
 package vista;
 
+import controladores.ControladorFrameAltaExpediente;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,6 +13,9 @@ import javax.swing.JTable;
  */
 public class VistaAltaExpediente extends javax.swing.JFrame {
 
+    public static String BTN_AGREGAR_ELEMENTO = "Agregar elemento de secuestro";
+    public static String BTN_AGREGAR_TRAMITE = "Agregar tipo de tramite al expediente";
+    public static String BTN_ACEPTAR = "Aceptar";
     
     public VistaAltaExpediente() {
         
@@ -21,9 +25,19 @@ public class VistaAltaExpediente extends javax.swing.JFrame {
         comboDestinoOficina.removeAllItems();      
         comboResponsable.removeAllItems();
         comboTipoTramite.removeAllItems();
+        comboTipoElementoSecuestro.removeAllItems();
+        botonAgregarElemento.setActionCommand(BTN_AGREGAR_ELEMENTO);
+        botonAgregarTramite.setActionCommand(BTN_AGREGAR_TRAMITE);
+        botonAceptar.setActionCommand(BTN_ACEPTAR);
       
     }
 
+  
+  public void setControlador(ControladorFrameAltaExpediente control){
+      botonAceptar.addActionListener(control);
+      botonAgregarElemento.addActionListener(control);
+      botonAgregarTramite.addActionListener(control);
+  }
   
   
     public void setComboOrigenOficina(ArrayList<String> arrayOficinas){
@@ -126,8 +140,10 @@ public class VistaAltaExpediente extends javax.swing.JFrame {
         return Integer.parseInt(textoNroFolio.getText());
     }
     
-    public void setComboTipoElementosSecuestro(){
-        
+    public void setComboTipoElementosSecuestro(ArrayList<String> elementos){
+         for(int i = 0; i<elementos.size();i++){
+            this.comboTipoElementoSecuestro.addItem(elementos.get(i));
+        }
     }
     
     public String getComboTipoElementosSecuestro(){
@@ -142,6 +158,9 @@ public class VistaAltaExpediente extends javax.swing.JFrame {
         return this.textoDescSecuestro.getText();
     }
     
+    public void limpiarTextoDescSecuestro(){
+        this.textoDescSecuestro.setText("");
+    }
     public void setTablaElementosSecuestros(JTable tablaElementosSecuestros){
         this.tablaElementosSecuestro = tablaElementosSecuestros;
     }
@@ -158,6 +177,14 @@ public class VistaAltaExpediente extends javax.swing.JFrame {
     
     public String getComboTipoTramite(){
         return ""+this.comboTipoTramite.getSelectedItem();
+    }
+    
+    public void setTextoDescripcionTramite(String descTramite){
+        this.textoDescripcionTramite.setText(descTramite);
+    }
+    
+    public void limpiarTextoDescripcionTramite(){
+        this.textoDescripcionTramite.setText("");
     }
     
     public String getTextoDescripcionTramite(){
@@ -199,7 +226,7 @@ public class VistaAltaExpediente extends javax.swing.JFrame {
         jPasswordField1 = new javax.swing.JPasswordField();
         jPasswordField2 = new javax.swing.JPasswordField();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        botonAceptar = new javax.swing.JButton();
         jLabel18 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -210,7 +237,7 @@ public class VistaAltaExpediente extends javax.swing.JFrame {
         jSpinner1 = new javax.swing.JSpinner();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaElementosSecuestro = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        botonAgregarElemento = new javax.swing.JButton();
         textoDescSecuestro = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
@@ -243,7 +270,7 @@ public class VistaAltaExpediente extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         comboTipoTramite = new javax.swing.JComboBox<>();
         textoDescripcionTramite = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
+        botonAgregarTramite = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         tablaTiposDeTramites = new javax.swing.JTable();
         jLabel19 = new javax.swing.JLabel();
@@ -269,7 +296,7 @@ public class VistaAltaExpediente extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Aceptar");
+        botonAceptar.setText("Aceptar");
 
         jLabel18.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel18.setText("ALTA ENTRADA DE EXPEDIENTE");
@@ -282,6 +309,13 @@ public class VistaAltaExpediente extends javax.swing.JFrame {
 
         tablaElementosSecuestro.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
@@ -301,7 +335,7 @@ public class VistaAltaExpediente extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tablaElementosSecuestro);
 
-        jButton1.setText("Agregar");
+        botonAgregarElemento.setText("Agregar");
 
         jLabel16.setText("Descripción:");
 
@@ -324,7 +358,7 @@ public class VistaAltaExpediente extends javax.swing.JFrame {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(textoDescSecuestro, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1))
+                                .addComponent(botonAgregarElemento))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(comboTipoElementoSecuestro, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -354,7 +388,7 @@ public class VistaAltaExpediente extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textoDescSecuestro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel16)
-                    .addComponent(jButton1))
+                    .addComponent(botonAgregarElemento))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -507,7 +541,7 @@ public class VistaAltaExpediente extends javax.swing.JFrame {
 
         jLabel10.setText("Tipo:");
 
-        jButton4.setText("Agregar");
+        botonAgregarTramite.setText("Agregar");
 
         tablaTiposDeTramites.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -542,7 +576,7 @@ public class VistaAltaExpediente extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(textoDescripcionTramite, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4))
+                        .addComponent(botonAgregarTramite))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 605, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19))
             .addGroup(jPanel4Layout.createSequentialGroup()
@@ -567,7 +601,7 @@ public class VistaAltaExpediente extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel23)
                     .addComponent(textoDescripcionTramite, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4))
+                    .addComponent(botonAgregarTramite))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -580,6 +614,7 @@ public class VistaAltaExpediente extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator2)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -587,13 +622,12 @@ public class VistaAltaExpediente extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                                 .addGap(9, 9, 9)
                                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                                 .addGap(527, 527, 527)
                                 .addComponent(jLabel6)
                                 .addGap(6, 6, 6)
-                                .addComponent(textoFechaHoy)))
+                                .addComponent(textoFechaHoy))
+                            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -605,16 +639,15 @@ public class VistaAltaExpediente extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(textoFechaHoy))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jLabel12.setText("Responsable:");
@@ -656,7 +689,7 @@ public class VistaAltaExpediente extends javax.swing.JFrame {
                     .addComponent(jButton2))
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(comboEstadoTramite, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -668,7 +701,7 @@ public class VistaAltaExpediente extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel18)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(7, 7, 7)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -687,7 +720,7 @@ public class VistaAltaExpediente extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(botonAceptar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -730,6 +763,9 @@ this.dispose();        // TODO add your handling code here:
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonAceptar;
+    private javax.swing.JButton botonAgregarElemento;
+    private javax.swing.JButton botonAgregarTramite;
     private javax.swing.JComboBox<String> comboDestinoOficina;
     private javax.swing.JComboBox<String> comboEstadoTramite;
     private javax.swing.JComboBox<String> comboOrigenOficina;
@@ -737,10 +773,7 @@ this.dispose();        // TODO add your handling code here:
     private javax.swing.JComboBox<String> comboTipoElementoSecuestro;
     private javax.swing.JComboBox<String> comboTipoExpediente;
     private javax.swing.JComboBox<String> comboTipoTramite;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

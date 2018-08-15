@@ -8,8 +8,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import modelo.LineaHistoria;
 import modelo.Persona;
+import persistencia.BDMostrarListaElementos;
 import persistencia.BDMostrarListaEmpleados;
 import persistencia.BDMostrarListaOficina;
 import persistencia.BDMostrarListaTiposTramites;
@@ -28,21 +31,38 @@ public class ControladorFrameAltaExpediente implements ActionListener{
     private BDMostrarListaTiposTramites rslistaTiposTramites;
     private MySqlConexion con;
     private Date fechahoy;
+    private Integer cantidadElementos = 1;
+    private String[] registroTablaElementos = new String[3];
+    private DefaultTableModel modeloTablaElementos = new DefaultTableModel();
+    private String[] registroTablaTramites = new String[2];
+    private DefaultTableModel modeloTablaTramites = new DefaultTableModel();
+    
     public ControladorFrameAltaExpediente(MySqlConexion con) throws SQLException, ClassNotFoundException{
         this.vistaaltaexpediente = new VistaAltaExpediente();
         this.con = con;
+        this.vistaaltaexpediente.setControlador(this);
         this.vistaaltaexpediente.ejecutar();
         
         obtenerOficinas();
         obtenerEmpleados();
         asignarFechaHoy();
         obtenerTiposTramites();
+        obtenerElementos();
+        modelarTablaElementos(vistaaltaexpediente.getTablaElementosSecuestros());
+        modelarTablaTramites(vistaaltaexpediente.getTablaTiposDeTramites());
         
     }
     
      @Override
     public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(e.getActionCommand().equals(vistaaltaexpediente.BTN_AGREGAR_ELEMENTO)){
+            agregarElemento(modeloTablaElementos);
+            vistaaltaexpediente.limpiarTextoDescSecuestro();
+        }
+        
+        if(e.getActionCommand().equals(vistaaltaexpediente.BTN_AGREGAR_TRAMITE)){
+            agregarTipoTramite(modeloTablaTramites);
+        }
     }
    
     
@@ -81,6 +101,20 @@ public class ControladorFrameAltaExpediente implements ActionListener{
         
     }
     
+    public void obtenerElementos() throws SQLException, ClassNotFoundException{
+        ArrayList<String> elementos = new ArrayList<String>();
+        this.con.conectar();
+        BDMostrarListaElementos rsListaElementos = new BDMostrarListaElementos(con);
+        
+        ResultSet rs = rsListaElementos.rsListaElementos();
+        
+        while(rs.next()){
+            elementos.add(rs.getString("descripcion"));
+        }
+        this.con.cerrarConexion();
+        vistaaltaexpediente.setComboTipoElementosSecuestro(elementos);
+    }
+    
   
     public void asignarFechaHoy(){
         fechahoy = new Date();
@@ -101,6 +135,43 @@ public class ControladorFrameAltaExpediente implements ActionListener{
         vistaaltaexpediente.setComboTipoTramite(tiposTramites);
     }
 
-   
+        public void agregarElemento(DefaultTableModel modelo){
+               String descTipoElemento = vistaaltaexpediente.getTextoDescSecuestro();
+               String tipoElemento = vistaaltaexpediente.getComboTipoElementosSecuestro();
+         
+               registroTablaElementos[0] = String.valueOf(cantidadElementos++);
+               registroTablaElementos[1] = tipoElemento;
+               registroTablaElementos[2] = descTipoElemento;
+                  
+               modelo.addRow(registroTablaElementos);
+        }
+        
+        public void modelarTablaElementos(JTable jtableElementos){
+            
+               String titulos[] = {
+                 "nro","Tipo Elemento","Descripción"  
+               };
+               modeloTablaElementos.setColumnIdentifiers(titulos);
+               jtableElementos.setModel(modeloTablaElementos);
+        }
+        
+        public void modelarTablaTramites(JTable jtableTramites){
+            String titulos[] = {
+                "Tipo Tramite","Descripcion Tramite"
+            };
+            modeloTablaTramites.setColumnIdentifiers(titulos);
+            jtableTramites.setModel(modeloTablaTramites);
+        }
+        
+        public void agregarTipoTramite(DefaultTableModel modelo){
+            String tipoTramite = vistaaltaexpediente.getComboTipoTramite();
+            String descripcionTramite = vistaaltaexpediente.getTextoDescripcionTramite();
+            
+            registroTablaTramites[0] = tipoTramite;
+            registroTablaTramites[1] = descripcionTramite;
+            
+            modelo.addRow(registroTablaTramites);
+            
+        }
     
 }
