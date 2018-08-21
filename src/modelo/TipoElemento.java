@@ -30,6 +30,8 @@ public class TipoElemento {
         this.descripcion = descripcion;
     }
   
-  
+  public String toString(){
+      return this.descripcion;
+  }
     
 }

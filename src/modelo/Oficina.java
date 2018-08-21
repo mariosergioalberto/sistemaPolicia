@@ -14,7 +14,7 @@ public class Oficina {
    
     
 
-    public Oficina(Integer id, String nombre, String direccion, Integer nroDireccion, String descripcion, Integer tipo) {
+    public Oficina(Integer id, String nombre, String direccion) {
         this.id = id;
         this.nombre = nombre;
         this.direccion = direccion;
@@ -59,7 +59,10 @@ public class Oficina {
         return nroDireccion;
     }
 
-  
+    @Override
+  public String toString(){
+      return this.nombre;
+  }
     
     
    

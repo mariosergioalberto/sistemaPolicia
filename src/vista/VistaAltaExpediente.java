@@ -6,6 +6,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JTable;
+import javax.swing.SpinnerNumberModel;
+import modelo.Elemento;
+import modelo.Oficina;
+import modelo.TipoElemento;
 
 /**
  *
@@ -16,6 +20,9 @@ public class VistaAltaExpediente extends javax.swing.JFrame {
     public static String BTN_AGREGAR_ELEMENTO = "Agregar elemento de secuestro";
     public static String BTN_AGREGAR_TRAMITE = "Agregar tipo de tramite al expediente";
     public static String BTN_ACEPTAR = "Aceptar";
+    
+private SpinnerNumberModel nm = new SpinnerNumberModel();
+
     
     public VistaAltaExpediente() {
         
@@ -29,6 +36,11 @@ public class VistaAltaExpediente extends javax.swing.JFrame {
         botonAgregarElemento.setActionCommand(BTN_AGREGAR_ELEMENTO);
         botonAgregarTramite.setActionCommand(BTN_AGREGAR_TRAMITE);
         botonAceptar.setActionCommand(BTN_ACEPTAR);
+        
+       nm.setMinimum(1);
+       nm.setMaximum(100);
+       spinnerCantidadElementos.setModel(nm);
+       spinnerCantidadElementos.setValue(1);
       
     }
 
@@ -40,10 +52,10 @@ public class VistaAltaExpediente extends javax.swing.JFrame {
   }
   
   
-    public void setComboOrigenOficina(ArrayList<String> arrayOficinas){
+    public void setComboOrigenOficina(ArrayList<Oficina> Oficinas){
         
-        for(int i = 0; i<arrayOficinas.size();i++){
-            this.comboOrigenOficina.addItem(arrayOficinas.get(i));
+        for(int i = 0; i<Oficinas.size();i++){
+            this.comboOrigenOficina.addItem(Oficinas.get(i));
         }
     }
     
@@ -51,10 +63,10 @@ public class VistaAltaExpediente extends javax.swing.JFrame {
         return ""+this.comboOrigenOficina.getSelectedItem();
     }
     
-    public void setComboDestinoOficina(ArrayList<String> arrayOficinas){
+    public void setComboDestinoOficina(ArrayList<Oficina> Oficinas){
         
-        for(int i = 0; i<arrayOficinas.size();i++){
-            this.comboDestinoOficina.addItem(arrayOficinas.get(i));
+        for(int i = 0; i<Oficinas.size();i++){
+            this.comboDestinoOficina.addItem(Oficinas.get(i));
         }
     }
     
@@ -140,9 +152,10 @@ public class VistaAltaExpediente extends javax.swing.JFrame {
         return Integer.parseInt(textoNroFolio.getText());
     }
     
-    public void setComboTipoElementosSecuestro(ArrayList<String> elementos){
-         for(int i = 0; i<elementos.size();i++){
-            this.comboTipoElementoSecuestro.addItem(elementos.get(i));
+    public void setComboTipoElementosSecuestro(ArrayList<TipoElemento> tiposElementos){
+    
+         for(int i = 0; i<tiposElementos.size();i++){
+            this.comboTipoElementoSecuestro.addItem(tiposElementos.get(i));
         }
     }
     
@@ -219,6 +232,14 @@ public class VistaAltaExpediente extends javax.swing.JFrame {
         return ""+this.comboEstadoTramite.getSelectedItem();
     }
     
+    public void setSpinnerCantidadElementos(Integer cantidad){
+        this.spinnerCantidadElementos.setValue(cantidad);
+    }
+    
+    public Integer getSpinnerCantidadElementos(){
+        return Integer.parseInt(String.valueOf(this.spinnerCantidadElementos.getValue()));
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -232,15 +253,15 @@ public class VistaAltaExpediente extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jPanel3 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
-        comboTipoElementoSecuestro = new javax.swing.JComboBox<>();
         jLabel15 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
+        spinnerCantidadElementos = new javax.swing.JSpinner();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaElementosSecuestro = new javax.swing.JTable();
         botonAgregarElemento = new javax.swing.JButton();
         textoDescSecuestro = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
+        comboTipoElementoSecuestro = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         textoFechaHoy = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
@@ -303,8 +324,6 @@ public class VistaAltaExpediente extends javax.swing.JFrame {
 
         jLabel14.setText("Tipo:");
 
-        comboTipoElementoSecuestro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CD-R", "DVD-R", "Celular SmartPhone", "Pendrive", "Tarjeta de memoria", "Otros" }));
-
         jLabel15.setText("Cantidad:");
 
         tablaElementosSecuestro.setModel(new javax.swing.table.DefaultTableModel(
@@ -360,11 +379,11 @@ public class VistaAltaExpediente extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(botonAgregarElemento))
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(comboTipoElementoSecuestro, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(comboTipoElementoSecuestro, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(26, 26, 26)
                                 .addComponent(jLabel15)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(spinnerCantidadElementos, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -381,9 +400,9 @@ public class VistaAltaExpediente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(comboTipoElementoSecuestro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel15))
+                    .addComponent(spinnerCantidadElementos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15)
+                    .addComponent(comboTipoElementoSecuestro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(3, 3, 3)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textoDescSecuestro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -423,13 +442,16 @@ public class VistaAltaExpediente extends javax.swing.JFrame {
 
         textoCausa.setColumns(20);
         textoCausa.setRows(5);
+        textoCausa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textoCausaKeyTyped(evt);
+            }
+        });
         jScrollPane1.setViewportView(textoCausa);
 
         jLabel8.setText("Procedencia:");
 
         jLabel9.setText("Destino:");
-
-        comboDestinoOficina.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3" }));
 
         jLabel20.setText("Libro:");
 
@@ -438,8 +460,6 @@ public class VistaAltaExpediente extends javax.swing.JFrame {
         jLabel22.setText("N°Oficio:");
 
         jLabel4.setText("Año:");
-
-        comboOrigenOficina.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -469,12 +489,10 @@ public class VistaAltaExpediente extends javax.swing.JFrame {
                                     .addComponent(textoAñoSumario, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addComponent(textoNroLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(90, 90, 90))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(comboOrigenOficina, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(32, 32, 32)))
+                                    .addGap(90, 90, 90)))
                             .addComponent(textoNroOficio, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(comboTipoExpediente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(comboTipoExpediente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(comboOrigenOficina, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addComponent(jLabel1)
@@ -488,8 +506,8 @@ public class VistaAltaExpediente extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(textoNroFolio, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(comboDestinoOficina, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboDestinoOficina, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(41, 41, 41))
         );
         jPanel1Layout.setVerticalGroup(
@@ -517,8 +535,8 @@ public class VistaAltaExpediente extends javax.swing.JFrame {
                             .addComponent(textoNroOficio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(comboOrigenOficina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8))
+                            .addComponent(jLabel8)
+                            .addComponent(comboOrigenOficina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(textoNroLibro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -757,6 +775,15 @@ this.dispose();        // TODO add your handling code here:
     }
     }//GEN-LAST:event_comboTipoExpedienteActionPerformed
 
+    private void textoCausaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textoCausaKeyTyped
+       char c= evt.getKeyChar();
+       if(Character.isLowerCase(c)){
+           String cad = (""+c).toUpperCase();
+           c=cad.charAt(0);
+           evt.setKeyChar(c);
+       } 
+    }//GEN-LAST:event_textoCausaKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -766,11 +793,11 @@ this.dispose();        // TODO add your handling code here:
     private javax.swing.JButton botonAceptar;
     private javax.swing.JButton botonAgregarElemento;
     private javax.swing.JButton botonAgregarTramite;
-    private javax.swing.JComboBox<String> comboDestinoOficina;
+    private javax.swing.JComboBox<Oficina> comboDestinoOficina;
     private javax.swing.JComboBox<String> comboEstadoTramite;
-    private javax.swing.JComboBox<String> comboOrigenOficina;
+    private javax.swing.JComboBox<Oficina> comboOrigenOficina;
     private javax.swing.JComboBox<String> comboResponsable;
-    private javax.swing.JComboBox<String> comboTipoElementoSecuestro;
+    private javax.swing.JComboBox<TipoElemento> comboTipoElementoSecuestro;
     private javax.swing.JComboBox<String> comboTipoExpediente;
     private javax.swing.JComboBox<String> comboTipoTramite;
     private javax.swing.JButton jButton2;
@@ -807,7 +834,7 @@ this.dispose();        // TODO add your handling code here:
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JSpinner spinnerCantidadElementos;
     private javax.swing.JTable tablaElementosSecuestro;
     private javax.swing.JTable tablaTiposDeTramites;
     private javax.swing.JTextField textoAñoSumario;

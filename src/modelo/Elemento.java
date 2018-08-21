@@ -6,16 +6,18 @@ package modelo;
  * @author Laboratio
  */
 public class Elemento {
-    private Integer numero;
+    private Integer id;
     private String descripcion;
     private TipoElemento tipoElemento;
+    private Integer cantidad;
     
    
 
-    public Elemento(Integer numero, String descripcion, TipoElemento tipoElemento) {
-        this.numero = numero;
+    public Elemento(Integer id, String descripcion, TipoElemento tipoElemento,Integer cantidad) {
+        this.id = id;
         this.descripcion = descripcion;
         this.tipoElemento = tipoElemento;
+        this.cantidad = cantidad;
         
     }
 
@@ -28,21 +30,32 @@ public class Elemento {
     }
 
 
-    public void setNumero(Integer numero) {
-        this.numero = numero;
+    public void setId(Integer numero) {
+        this.id = numero;
     }
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
-    public Integer getNumero() {
-        return numero;
+    public Integer getId() {
+        return id;
     }
 
     public String getDescripcion() {
         return descripcion;
     }
+
+    public Integer getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(Integer cantidad) {
+        this.cantidad = cantidad;
+    }
     
+    public String toString(){
+        return descripcion;
+    }
     
 }
