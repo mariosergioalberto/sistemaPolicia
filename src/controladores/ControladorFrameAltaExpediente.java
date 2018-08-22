@@ -40,6 +40,8 @@ public class ControladorFrameAltaExpediente implements ActionListener{
     private String[] registroTablaTramites = new String[2];
     private DefaultTableModel modeloTablaTramites = new DefaultTableModel();
     
+    private ArrayList<TipoElemento> tiposElementosTabla = new ArrayList<TipoElemento>();
+    
     public ControladorFrameAltaExpediente(MySqlConexion con) throws SQLException, ClassNotFoundException{
         this.vistaaltaexpediente = new VistaAltaExpediente();
         this.con = con;
@@ -192,14 +194,30 @@ public class ControladorFrameAltaExpediente implements ActionListener{
             
             String tipoExpediente = vistaaltaexpediente.getComboTipoExpediente();
             Integer nroSumario = vistaaltaexpediente.getTextoNroSumario();
-            String origen = vistaaltaexpediente.getComboOrigenOficina();
-            String destino = vistaaltaexpediente.getComboDestinoOficina();
+            Integer añoSumario = vistaaltaexpediente.getTextoAñoSumario();
+            Integer nroOrigen = vistaaltaexpediente.getComboOrigenOficina().getId();
+            String origen = vistaaltaexpediente.getComboOrigenOficina().getNombre();
+            Integer nroDestino = vistaaltaexpediente.getComboDestinoOficina().getId();
+            String destino = vistaaltaexpediente.getComboDestinoOficina().getNombre();
             String causa = vistaaltaexpediente.getTextoCausa();
             Integer libro = vistaaltaexpediente.getTextoNroLibro();
             Integer folio = vistaaltaexpediente.getTextoNroFolio();
             
+            
+            
            
             
+           
+            
+        }
+        
+        public ArrayList<Elemento> obtenerElementosTabla(){
+            ArrayList<Elemento> elementos = new ArrayList<Elemento>();
+            
+            
+            
+            
+            return elementos;
         }
     
 }

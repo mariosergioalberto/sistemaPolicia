@@ -14,9 +14,9 @@ public class Sumario extends Expediente{
     private ArrayList<Oficio> oficios = new ArrayList<Oficio>();
     private ArrayList<Nota> notas = new ArrayList<Nota>();
 
-    public Sumario(Integer nroSumario, Integer año, String causa,String descripcion, ArrayList<Elemento> elementos, ArrayList<Tramite> tramites) {
+    public Sumario(Integer nroSumario, Integer año,String descripcion, ArrayList<Elemento> elementos, ArrayList<Tramite> tramites,Integer libro,Integer folio) {
         
-        super(causa,descripcion,elementos,tramites);
+        super(descripcion,elementos,tramites,libro,folio);
         this.nroSumario = nroSumario;
         this.año = año;
     }

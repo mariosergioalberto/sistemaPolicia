@@ -8,9 +8,8 @@ public class Nota extends Expediente{
     private Integer nroNota;
     
 
-    public Nota(Integer nroNota, String descripcion, String causa, ArrayList<Elemento> elementos, ArrayList<Tramite> tramites){
-               
-        super(causa,descripcion,elementos,tramites);
+    public Nota(Integer nroNota, String descripcion, ArrayList<Elemento> elementos, ArrayList<Tramite> tramites,Integer libro,Integer folio) {
+        super(descripcion,elementos,tramites,libro,folio);
         this.nroNota = nroNota;
         
     }
