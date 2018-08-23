@@ -13,7 +13,7 @@ public class Elemento {
     
    
 
-    public Elemento(Integer id, String descripcion, TipoElemento tipoElemento,Integer cantidad) {
+    public Elemento(String descripcion, TipoElemento tipoElemento,Integer cantidad) {
         this.id = id;
         this.descripcion = descripcion;
         this.tipoElemento = tipoElemento;

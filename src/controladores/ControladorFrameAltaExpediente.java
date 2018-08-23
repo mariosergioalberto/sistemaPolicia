@@ -10,11 +10,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import modelo.Elemento;
 import modelo.Oficina;
 
 import modelo.Persona;
 import modelo.TipoElemento;
+import persistencia.BDAltaExpediente;
 import persistencia.BDMostrarListaElementos;
 import persistencia.BDMostrarListaEmpleados;
 import persistencia.BDMostrarListaOficina;
@@ -35,10 +37,13 @@ public class ControladorFrameAltaExpediente implements ActionListener{
     private MySqlConexion con;
     private Date fechahoy;
     private Integer cantidadElementos = 1;
-    private String[] registroTablaElementos = new String[4];
+    private String[] registroTablaElementos = new String[5];
     private DefaultTableModel modeloTablaElementos = new DefaultTableModel();
-    private String[] registroTablaTramites = new String[2];
+    private String[] registroTablaTramites = new String[3];
     private DefaultTableModel modeloTablaTramites = new DefaultTableModel();
+    
+    private BDAltaExpediente BDaltaexpediente;
+   
     
     private ArrayList<TipoElemento> tiposElementosTabla = new ArrayList<TipoElemento>();
     
@@ -70,7 +75,7 @@ public class ControladorFrameAltaExpediente implements ActionListener{
         }
         if(e.getActionCommand().equals(vistaaltaexpediente.BTN_ACEPTAR)){
             if(vistaaltaexpediente.getComboTipoExpediente().equals("Sumario")){
-                altaNuevoSumario();
+                //*********************************************************************************
             }
         }
     }
@@ -149,14 +154,16 @@ public class ControladorFrameAltaExpediente implements ActionListener{
     }
 
         public void agregarElemento(DefaultTableModel modelo){
+               Integer idTipoElemento = vistaaltaexpediente.getComboTipoElementosSecuestro().getId();
                String descTipoElemento = vistaaltaexpediente.getTextoDescSecuestro();
-               String tipoElemento = vistaaltaexpediente.getComboTipoElementosSecuestro();
+               String tipoElemento = vistaaltaexpediente.getComboTipoElementosSecuestro().getDescripcion();
                String cantidad = String.valueOf(vistaaltaexpediente.getSpinnerCantidadElementos());
          
                registroTablaElementos[0] = String.valueOf(cantidadElementos++);
                registroTablaElementos[1] = tipoElemento;
                registroTablaElementos[2] = cantidad;
                registroTablaElementos[3] = descTipoElemento;
+               registroTablaElementos[4] = String.valueOf(idTipoElemento);
                   
                modelo.addRow(registroTablaElementos);
         }
@@ -164,7 +171,7 @@ public class ControladorFrameAltaExpediente implements ActionListener{
         public void modelarTablaElementos(JTable jtableElementos){
             
                String titulos[] = {
-                 "nro","Tipo Elemento","Cantidad","Descripción"  
+                 "nro","Tipo Elemento","Cantidad","Descripción","idElemento"  
                };
                modeloTablaElementos.setColumnIdentifiers(titulos);
                jtableElementos.setModel(modeloTablaElementos);
@@ -189,7 +196,8 @@ public class ControladorFrameAltaExpediente implements ActionListener{
             
         }
         
-        public void altaNuevoSumario(){
+        public void altaNuevoSumario() throws SQLException, ClassNotFoundException{
+            BDaltaexpediente = new BDAltaExpediente(con);
             
             
             String tipoExpediente = vistaaltaexpediente.getComboTipoExpediente();
@@ -203,19 +211,34 @@ public class ControladorFrameAltaExpediente implements ActionListener{
             Integer libro = vistaaltaexpediente.getTextoNroLibro();
             Integer folio = vistaaltaexpediente.getTextoNroFolio();
             
-            
-            
-           
-            
-           
+            BDaltaexpediente.altaExpediente(destino, nroOrigen, nroDestino, libro, folio);
+            BDaltaexpediente.altaSumario(libro, folio, causa);
             
         }
         
-        public ArrayList<Elemento> obtenerElementosTabla(){
+        
+        public ArrayList<Elemento> obtenerElementosTabla() throws SQLException, ClassNotFoundException{
             ArrayList<Elemento> elementos = new ArrayList<Elemento>();
             
+            JTable table = vistaaltaexpediente.getTablaElementosSecuestros();
             
+            TableModel tableModel = table.getModel();
             
+            int cols = tableModel.getColumnCount();
+            int rows = tableModel.getRowCount();
+            
+            for(int i=0; i<rows; i++){
+                for(int j=0;j<cols; j++){
+                    
+                    Integer id = Integer.parseInt((String) tableModel.getValueAt(i, 5));
+                    String descripcion = (String) tableModel.getValueAt(i, 4);
+                    //Integer id = Integer.parseInt((String) tableModel.getValueAt(i, 3));
+                    TipoElemento tipo = BDaltaexpediente.obtenerTipoElemento(id);
+                   // Elemento elemento = new Elemento();
+                    //public Elemento(String descripcion, TipoElemento tipoElemento,Integer cantidad) {
+   
+                }
+            }
             
             return elementos;
         }
