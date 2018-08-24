@@ -239,6 +239,14 @@ private SpinnerNumberModel nm = new SpinnerNumberModel();
         return Integer.parseInt(String.valueOf(this.spinnerCantidadElementos.getValue()));
     }
     
+    public void setTextoDescripcionExpediente(String descripcion){
+        this.textoDescripcionExpediente.setText(descripcion);
+    }
+    
+    public String getTextoDescripcionExpediente(){
+        return this.textoDescripcionExpediente.getText();
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -286,7 +294,7 @@ private SpinnerNumberModel nm = new SpinnerNumberModel();
         jLabel4 = new javax.swing.JLabel();
         comboOrigenOficina = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        textoDescripcionExpediente = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jPanel4 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
@@ -513,7 +521,7 @@ private SpinnerNumberModel nm = new SpinnerNumberModel();
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
                     .addComponent(comboDestinoOficina, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1))
+                    .addComponent(textoDescripcionExpediente))
                 .addGap(41, 41, 41))
             .addComponent(jSeparator1)
         );
@@ -551,7 +559,7 @@ private SpinnerNumberModel nm = new SpinnerNumberModel();
                             .addComponent(jLabel21)
                             .addComponent(textoNroFolio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(textoDescripcionExpediente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -837,13 +845,13 @@ this.dispose();        // TODO add your handling code here:
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JSpinner spinnerCantidadElementos;
     private javax.swing.JTable tablaElementosSecuestro;
     private javax.swing.JTable tablaTiposDeTramites;
     private javax.swing.JTextField textoAñoSumario;
     private javax.swing.JTextArea textoCausa;
     private javax.swing.JTextField textoDescSecuestro;
+    private javax.swing.JTextField textoDescripcionExpediente;
     private javax.swing.JTextField textoDescripcionTramite;
     private javax.swing.JLabel textoFechaHoy;
     private javax.swing.JTextField textoNroFolio;

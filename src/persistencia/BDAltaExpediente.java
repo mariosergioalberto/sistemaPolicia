@@ -53,13 +53,13 @@ public class BDAltaExpediente {
                 + nroOrigen+","
                 + nroDestino+","
                 + libro+","
-                + folio+"')";
+                + folio+")";
         
         PreparedStatement st = this.con.getConexion().prepareStatement(consulta);
         
         st.execute();
         
-        con.cerrarConexion();
+        //con.cerrarConexion();
     }
     
     
@@ -68,24 +68,24 @@ public class BDAltaExpediente {
        
        String consultaSumario;
        ResultSet rs = null;
-       con.conectar();
+       //con.conectar();
        
         Integer id = obtenerUltimoExpediente();
-     
+        System.out.println("Ultimo id "+id);
        
        
         consultaSumario = "INSERT INTO `sumario` "
-                +"(`idSumario`,`nro`,`causa`,`Expediente_idExpediente`) "
+                +"(`idSumario`,`nro`,`año`,`causa`,`Expediente_idExpediente`) "
                 + "VALUES (NULL,"
                 +nro+","
                 +año+","
-                +"'"+causa+",'"
+                +"'"+causa+"',"
                 +id+")";
 
        PreparedStatement st2 = this.con.getConexion().prepareStatement(consultaSumario);
        st2.execute();
         
-       con.cerrarConexion();
+      // con.cerrarConexion();
         
     }
     
@@ -110,7 +110,7 @@ public class BDAltaExpediente {
         }
         
         
-        con.cerrarConexion();
+       // con.cerrarConexion();
         
     }
     
@@ -148,7 +148,7 @@ public class BDAltaExpediente {
            tipo = new TipoElemento(rs.getInt("idTipoElemento"),rs.getString("descripcion"));
        }
        
-       con.cerrarConexion();
+       //con.cerrarConexion();
        return tipo;
    }
 }
