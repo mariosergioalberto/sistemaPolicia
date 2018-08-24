@@ -12,11 +12,17 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import modelo.Elemento;
+import modelo.Empleado;
+import modelo.Historia;
+import modelo.LineaTramite;
 import modelo.Oficina;
 
 import modelo.Persona;
 import modelo.TipoElemento;
+import modelo.TipoTramite;
+import modelo.Tramite;
 import persistencia.BDAltaExpediente;
+import persistencia.BDAltaTramite;
 import persistencia.BDMostrarListaElementos;
 import persistencia.BDMostrarListaEmpleados;
 import persistencia.BDMostrarListaOficina;
@@ -43,8 +49,7 @@ public class ControladorFrameAltaExpediente implements ActionListener{
     private DefaultTableModel modeloTablaTramites = new DefaultTableModel();
     
     private BDAltaExpediente BDaltaexpediente;
-   
-    
+    private BDAltaTramite BDaltaTramite;
     private ArrayList<TipoElemento> tiposElementosTabla = new ArrayList<TipoElemento>();
     
     public ControladorFrameAltaExpediente(MySqlConexion con) throws SQLException, ClassNotFoundException{
@@ -102,16 +107,18 @@ public class ControladorFrameAltaExpediente implements ActionListener{
     }
     
     public void obtenerEmpleados() throws SQLException, ClassNotFoundException{
-        ArrayList<String> empleados = new ArrayList<String>();
+        ArrayList<Empleado> empleados = new ArrayList<Empleado>();
         this.con.conectar();
         rsListaEmpleados = new BDMostrarListaEmpleados(con);
         
         ResultSet rs = rsListaEmpleados.RSListaEmpleados();
-        
+        // public Empleado(Integer legajo, String nombre, String apellido, Integer dni, String fechaNac, String direccion, String rango) {
+    
         while(rs.next()){
             Persona persona = rsListaEmpleados.obtenerPersona(rs.getInt("Persona_idPersona"));
-            empleados.add(persona.getNombre()+" "+persona.getApellido());
-            System.out.println(persona.getNombre());
+            Empleado emp = new Empleado(rs.getInt("legajo"),persona.getNombre(),persona.getApellido(),persona.getDni(),persona.getFechaNac(),persona.getDireccion(),rs.getString("rango"));
+            empleados.add(emp);
+            System.out.println(emp);
         }
         con.cerrarConexion();
         vistaaltaexpediente.setComboResponsable(empleados);
@@ -141,12 +148,15 @@ public class ControladorFrameAltaExpediente implements ActionListener{
     }
     
     public void obtenerTiposTramites() throws SQLException, ClassNotFoundException{
-        ArrayList<String> tiposTramites = new ArrayList<String>();
+        ArrayList<TipoTramite> tiposTramites = new ArrayList<TipoTramite>();
         rslistaTiposTramites = new BDMostrarListaTiposTramites();
         this.con.conectar();
         ResultSet rs = rslistaTiposTramites.RSListaTipoTramites(con);
         while(rs.next()){
-            tiposTramites.add(rs.getString("descripcion"));
+            Integer id = rs.getInt("idTipoTramite");
+            String descripcion = rs.getString("descripcion");
+            TipoTramite tipoTramite = new TipoTramite(id,descripcion);
+            tiposTramites.add(tipoTramite);
         }
         
         con.cerrarConexion();
@@ -179,18 +189,19 @@ public class ControladorFrameAltaExpediente implements ActionListener{
         
         public void modelarTablaTramites(JTable jtableTramites){
             String titulos[] = {
-                "Tipo Tramite","Descripcion Tramite"
+                "idTipoTramite","Tipo Tramite","Descripcion Tramite"
             };
             modeloTablaTramites.setColumnIdentifiers(titulos);
             jtableTramites.setModel(modeloTablaTramites);
         }
         
         public void agregarTipoTramite(DefaultTableModel modelo){
-            String tipoTramite = vistaaltaexpediente.getComboTipoTramite();
-            String descripcionTramite = vistaaltaexpediente.getTextoDescripcionTramite();
             
-            registroTablaTramites[0] = tipoTramite;
-            registroTablaTramites[1] = descripcionTramite;
+            TipoTramite tipoTramite = vistaaltaexpediente.getComboTipoTramite();
+            String descripcionTramite = vistaaltaexpediente.getTextoDescripcionTramite();
+            registroTablaTramites[0] = String.valueOf(tipoTramite.getId());
+            registroTablaTramites[1] = tipoTramite.getDescripcion();
+            registroTablaTramites[2] = descripcionTramite;
             
             modelo.addRow(registroTablaTramites);
             
@@ -210,10 +221,23 @@ public class ControladorFrameAltaExpediente implements ActionListener{
             String causa = vistaaltaexpediente.getTextoCausa();
             Integer libro = vistaaltaexpediente.getTextoNroLibro();
             Integer folio = vistaaltaexpediente.getTextoNroFolio();
+           
             
             BDaltaexpediente.altaExpediente(destino, nroOrigen, nroDestino, libro, folio);
             BDaltaexpediente.altaSumario(libro, folio, causa);
             
+            
+            
+        }
+        
+        public void altaTramite() throws SQLException, ClassNotFoundException{
+            
+            Integer plazo = vistaaltaexpediente.getTextoPlazo();
+            //Integer idEmpleado = vistaaltaexpediente.getComboResponsable().get;
+            
+            
+            BDaltaTramite = new BDAltaTramite(con);
+           
         }
         
         
@@ -230,17 +254,46 @@ public class ControladorFrameAltaExpediente implements ActionListener{
             for(int i=0; i<rows; i++){
                 for(int j=0;j<cols; j++){
                     
-                    Integer id = Integer.parseInt((String) tableModel.getValueAt(i, 5));
-                    String descripcion = (String) tableModel.getValueAt(i, 4);
-                    //Integer id = Integer.parseInt((String) tableModel.getValueAt(i, 3));
+                    Integer id = Integer.parseInt((String) tableModel.getValueAt(i, 4));
+                    String descripcion = (String) tableModel.getValueAt(i, 3);
                     TipoElemento tipo = BDaltaexpediente.obtenerTipoElemento(id);
-                   // Elemento elemento = new Elemento();
-                    //public Elemento(String descripcion, TipoElemento tipoElemento,Integer cantidad) {
+                    Integer cantidad = (Integer) tableModel.getValueAt(i, 2);
+                    Elemento elemento = new Elemento(descripcion,tipo,cantidad);
+                    elementos.add(elemento);
    
                 }
             }
             
             return elementos;
+        }
+        
+        public ArrayList<LineaTramite> obtenerTramitesTabla(){
+            ArrayList<LineaTramite> lineasTramites = new ArrayList<LineaTramite>();
+            
+            JTable table = vistaaltaexpediente.getTablaTiposDeTramites();
+            
+            TableModel tableModel = table.getModel();
+            
+            int cols = tableModel.getColumnCount();
+            int rows = tableModel.getRowCount();
+            
+            for(int i=0; i<rows; i++){//ppublic Tramite(Integer numero,Integer plazo,ArrayList<TipoTramite> tramites, Historia historia) {
+                for(int j=0;j<cols; j++){
+                    
+                    Integer idTipoTramite = (Integer) tableModel.getValueAt(i,0);
+                    String descTipoTramite = (String) tableModel.getValueAt(i,1);
+                    String descLineaTramite = (String) tableModel.getValueAt(i, 2);
+                    TipoTramite tipo = new TipoTramite(idTipoTramite, descTipoTramite); // public LineaTramite(Integer id,TipoTramite tipo, String descripcion){
+                    LineaTramite linea = new LineaTramite(0, tipo, descLineaTramite);
+                    
+                    lineasTramites.add(linea);
+                   
+   
+                }
+            }
+            
+            return lineasTramites;
+            
         }
     
 }

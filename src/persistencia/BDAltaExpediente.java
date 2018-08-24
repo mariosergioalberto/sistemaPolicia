@@ -89,11 +89,33 @@ public class BDAltaExpediente {
         
     }
     
-    public void altaElementos(ArrayList<Elemento> elementos){
+    public void altaElementos(ArrayList<Elemento> elementos) throws SQLException, ClassNotFoundException{
+       
+        Integer id = null;
+        ResultSet rs = null;
+        con.conectar();
+        
+        for(int i=0;i<elementos.size();i++){
+           String consultaAltaExpediente = "INSERT INTO `elemento` "
+                +"(`idElemento`,`descripcion`,`cantidad`,`TipoElemento_idTipoElemento`) "
+                + "VALUES (NULL,"
+                +"'"+elementos.get(i).getDescripcion()+"',"
+                +"'"+elementos.get(i).getCantidad()+","
+                +elementos.get(i).getTipoElemento().getId()+")";
+            
+            PreparedStatement st = this.con.getConexion().prepareStatement(consultaAltaExpediente);
+        
+            st.execute();
+            
+        }
+        
+        
+        con.cerrarConexion();
         
     }
     
     public Integer obtenerUltimoExpediente() throws SQLException{
+        
         Integer id = null;
         ResultSet rs = null;
         String consultaID;

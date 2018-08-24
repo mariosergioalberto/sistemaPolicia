@@ -3,6 +3,7 @@ package modelo;
 
 public class Persona {
     
+    private Integer id;
     private String nombre;
     private String apellido;
     private Integer dni;
@@ -18,6 +19,14 @@ public class Persona {
         
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+    
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }

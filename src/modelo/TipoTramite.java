@@ -35,6 +35,9 @@ public class TipoTramite {
         this.descripcion = descripcion;
     }
 
-    
+    @Override
+    public String toString(){
+        return this.descripcion;
+    }
     
 }

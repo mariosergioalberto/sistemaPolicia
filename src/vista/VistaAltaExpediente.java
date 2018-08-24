@@ -8,8 +8,10 @@ import java.util.Date;
 import javax.swing.JTable;
 import javax.swing.SpinnerNumberModel;
 import modelo.Elemento;
+import modelo.Empleado;
 import modelo.Oficina;
 import modelo.TipoElemento;
+import modelo.TipoTramite;
 
 /**
  *
@@ -74,7 +76,7 @@ private SpinnerNumberModel nm = new SpinnerNumberModel();
         return (Oficina) this.comboDestinoOficina.getSelectedItem();
     }
     
-    public void setComboResponsable(ArrayList<String> arrayResponsable){
+    public void setComboResponsable(ArrayList<Empleado> arrayResponsable){
         for(int i = 0; i<arrayResponsable.size();i++){
             this.comboResponsable.addItem(arrayResponsable.get(i));
         }
@@ -182,14 +184,14 @@ private SpinnerNumberModel nm = new SpinnerNumberModel();
         return this.tablaElementosSecuestro;
     }
     
-    public void setComboTipoTramite(ArrayList<String> arrayTramites){
+    public void setComboTipoTramite(ArrayList<TipoTramite> arrayTramites){
         for(int i = 0; i<arrayTramites.size();i++){
             this.comboTipoTramite.addItem(arrayTramites.get(i));
         }
     }
     
-    public String getComboTipoTramite(){
-        return ""+this.comboTipoTramite.getSelectedItem();
+    public TipoTramite getComboTipoTramite(){
+        return (TipoTramite) this.comboTipoTramite.getSelectedItem();
     }
     
     public void setTextoDescripcionTramite(String descTramite){
@@ -212,12 +214,9 @@ private SpinnerNumberModel nm = new SpinnerNumberModel();
         return this.tablaTiposDeTramites;
     }
     
-    public void setComboResponsable(){
-        
-    }
     
-    public String getComboResponsable(){
-        return ""+this.comboResponsable.getSelectedItem();
+    public Empleado getComboResponsable(){
+        return (Empleado) this.comboResponsable.getSelectedItem();
     }
     
     public void setTextoPlazo(Integer plazo){
@@ -291,13 +290,13 @@ private SpinnerNumberModel nm = new SpinnerNumberModel();
         jSeparator1 = new javax.swing.JSeparator();
         jPanel4 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        comboTipoTramite = new javax.swing.JComboBox<>();
         textoDescripcionTramite = new javax.swing.JTextField();
         botonAgregarTramite = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         tablaTiposDeTramites = new javax.swing.JTable();
         jLabel19 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
+        comboTipoTramite = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
         comboResponsable = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
@@ -602,19 +601,17 @@ private SpinnerNumberModel nm = new SpinnerNumberModel();
                                 .addGap(41, 41, 41)
                                 .addComponent(jLabel10)))
                         .addGap(18, 18, 18)
-                        .addComponent(textoDescripcionTramite, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(botonAgregarTramite))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(textoDescripcionTramite, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(botonAgregarTramite))
+                            .addComponent(comboTipoTramite, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 605, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19))
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(comboTipoTramite, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
-                        .addGap(307, 307, 307)
-                        .addComponent(jLabel19)))
+                .addGap(307, 307, 307)
+                .addComponent(jLabel19)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -676,8 +673,6 @@ private SpinnerNumberModel nm = new SpinnerNumberModel();
         );
 
         jLabel12.setText("Responsable:");
-
-        comboResponsable.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel11.setText("Plazo:");
 
@@ -803,10 +798,10 @@ this.dispose();        // TODO add your handling code here:
     private javax.swing.JComboBox<Oficina> comboDestinoOficina;
     private javax.swing.JComboBox<String> comboEstadoTramite;
     private javax.swing.JComboBox<Oficina> comboOrigenOficina;
-    private javax.swing.JComboBox<String> comboResponsable;
+    private javax.swing.JComboBox<Empleado> comboResponsable;
     private javax.swing.JComboBox<TipoElemento> comboTipoElementoSecuestro;
     private javax.swing.JComboBox<String> comboTipoExpediente;
-    private javax.swing.JComboBox<String> comboTipoTramite;
+    private javax.swing.JComboBox<TipoTramite> comboTipoTramite;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
