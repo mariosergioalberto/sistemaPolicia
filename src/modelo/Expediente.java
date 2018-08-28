@@ -92,7 +92,5 @@ public class Expediente {
     public Integer getFolio() {
         return folio;
     }
-    
    
-    
 }

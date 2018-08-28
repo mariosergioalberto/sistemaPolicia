@@ -7,17 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import modelo.LineaTramite;
 
-/**
- *
- * @author Sergio Alberto
- */
+
 public class BDAltaTramite {
     
-    private Integer id;
-    private Integer plazo;
-    private Integer idempleado;
-    private Integer idEstado;
-    private Integer idExpediente;
+    
     private MySqlConexion con;
     
     public BDAltaTramite(MySqlConexion con){
@@ -26,7 +19,7 @@ public class BDAltaTramite {
     }
     
     public void altaTramite(Integer id,Integer plazo,Integer idempleado,Integer idEstado,Integer idExpediente) throws SQLException, ClassNotFoundException{
-        con.conectar();
+        //con.conectar();
         
         String consulta = "INSERT INTO `tramite` "
                 + "(`idTramite`,`plazo`,`Empleado_idEmpleado`,`Expediente_idExpediente`,`Estado_idEstado`) "
@@ -42,11 +35,12 @@ public class BDAltaTramite {
       
     }
     
-    public void altaLineas( ArrayList<LineaTramite> lineasTramites) throws SQLException, ClassNotFoundException{
-        Integer ultimoId = obtenerUltimoTramite();
+    public void altaLineas( ArrayList<LineaTramite> lineasTramites, Integer ultimoId) throws SQLException, ClassNotFoundException{
+        //Integer ultimoId = obtenerUltimoTramite();
        
         
         for(int i=0;i<lineasTramites.size();i++){
+            
             String consulta = "INSERT INTO `lineatramite`"
                 +"(`idLineaTramite`,`Tramite_idTramite`,`TipoTramite_idTipoTramite`,`descripcion`)"
                 + "VALUES (NULL,"+ultimoId

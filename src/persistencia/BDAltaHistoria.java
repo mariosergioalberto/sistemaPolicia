@@ -13,7 +13,8 @@ import java.util.Date;
 public class BDAltaHistoria {
   
     private MySqlConexion con;
-    private Date fechaHora;
+ 
+    
     
     public BDAltaHistoria(MySqlConexion con){
         this.con = con;
@@ -21,7 +22,7 @@ public class BDAltaHistoria {
     
     public void altaHistoria(Integer idTramite) throws SQLException, ClassNotFoundException{
        String descripcion = "Entrada de expediente";
-      //  con.conectar();
+      
         
         
         String consulta = "INSERT INTO `historia` "
@@ -36,6 +37,6 @@ public class BDAltaHistoria {
             st.execute();
         
         
-        con.cerrarConexion();
+        
     }
 }

@@ -15,14 +15,15 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import modelo.Elemento;
 import modelo.Empleado;
-import modelo.Historia;
+
 import modelo.LineaTramite;
 import modelo.Oficina;
 
 import modelo.Persona;
 import modelo.TipoElemento;
 import modelo.TipoTramite;
-import modelo.Tramite;
+
+import persistencia.BDAltaElementosExpediente;
 import persistencia.BDAltaExpediente;
 import persistencia.BDAltaHistoria;
 import persistencia.BDAltaTramite;
@@ -54,6 +55,9 @@ public class ControladorFrameAltaExpediente implements ActionListener{
     private BDAltaExpediente BDaltaexpediente;
     private BDAltaTramite BDaltaTramite;
     private ArrayList<TipoElemento> tiposElementosTabla = new ArrayList<TipoElemento>();
+    private Integer ultimoidexpediente;
+    private BDAltaHistoria altaHistoria;
+    private BDAltaElementosExpediente BDaltaelementos;
     
     public ControladorFrameAltaExpediente(MySqlConexion con) throws SQLException, ClassNotFoundException{
         this.vistaaltaexpediente = new VistaAltaExpediente();
@@ -74,12 +78,12 @@ public class ControladorFrameAltaExpediente implements ActionListener{
      @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().equals(vistaaltaexpediente.BTN_AGREGAR_ELEMENTO)){
-            agregarElemento(modeloTablaElementos);
+            agregarElementoTabla(modeloTablaElementos);
             vistaaltaexpediente.limpiarTextoDescSecuestro();
         }
         
         if(e.getActionCommand().equals(vistaaltaexpediente.BTN_AGREGAR_TRAMITE)){
-            agregarTipoTramite(modeloTablaTramites);
+            agregarTipoTramiteTabla(modeloTablaTramites);
         }
         if(e.getActionCommand().equals(vistaaltaexpediente.BTN_ACEPTAR)){
             if(vistaaltaexpediente.getComboTipoExpediente().equals("Sumario")){
@@ -102,14 +106,14 @@ public class ControladorFrameAltaExpediente implements ActionListener{
         
         rsListaOficinas = new BDMostrarListaOficina();
         this.con.conectar();
-        ResultSet rs = rsListaOficinas.RSListaOficinas(con);
+        ResultSet rs = rsListaOficinas.RSListaOficinas(this.con);
         
         while(rs.next()){
             Oficina oficina = new Oficina(rs.getInt("idOficina"),rs.getString("nombre"),rs.getString("direccion"));
             oficinas.add(oficina);
         }
      
-        con.cerrarConexion();
+        this.con.cerrarConexion();
         vistaaltaexpediente.setComboOrigenOficina(oficinas);
         vistaaltaexpediente.setComboDestinoOficina(oficinas);
         
@@ -118,7 +122,7 @@ public class ControladorFrameAltaExpediente implements ActionListener{
     public void obtenerEmpleados() throws SQLException, ClassNotFoundException{
         ArrayList<Empleado> empleados = new ArrayList<Empleado>();
         this.con.conectar();
-        rsListaEmpleados = new BDMostrarListaEmpleados(con);
+        rsListaEmpleados = new BDMostrarListaEmpleados(this.con);
         
         ResultSet rs = rsListaEmpleados.RSListaEmpleados();
         // public Empleado(Integer legajo, String nombre, String apellido, Integer dni, String fechaNac, String direccion, String rango) {
@@ -130,7 +134,7 @@ public class ControladorFrameAltaExpediente implements ActionListener{
             empleados.add(emp);
             System.out.println(emp);
         }
-        con.cerrarConexion();
+        this.con.cerrarConexion();
         vistaaltaexpediente.setComboResponsable(empleados);
         
     }
@@ -138,7 +142,7 @@ public class ControladorFrameAltaExpediente implements ActionListener{
     public void obtenerElementos() throws SQLException, ClassNotFoundException{
         ArrayList<TipoElemento> tiposElementos = new ArrayList<TipoElemento>();
         this.con.conectar();
-        BDMostrarListaElementos rsListaElementos = new BDMostrarListaElementos(con);
+        BDMostrarListaElementos rsListaElementos = new BDMostrarListaElementos(this.con);
         
         ResultSet rs = rsListaElementos.rsListaElementos();
         
@@ -161,7 +165,7 @@ public class ControladorFrameAltaExpediente implements ActionListener{
         ArrayList<TipoTramite> tiposTramites = new ArrayList<TipoTramite>();
         rslistaTiposTramites = new BDMostrarListaTiposTramites();
         this.con.conectar();
-        ResultSet rs = rslistaTiposTramites.RSListaTipoTramites(con);
+        ResultSet rs = rslistaTiposTramites.RSListaTipoTramites(this.con);
         while(rs.next()){
             Integer id = rs.getInt("idTipoTramite");
             String descripcion = rs.getString("descripcion");
@@ -169,11 +173,11 @@ public class ControladorFrameAltaExpediente implements ActionListener{
             tiposTramites.add(tipoTramite);
         }
         
-        con.cerrarConexion();
+        this.con.cerrarConexion();
         vistaaltaexpediente.setComboTipoTramite(tiposTramites);
     }
 
-        public void agregarElemento(DefaultTableModel modelo){
+        public void agregarElementoTabla(DefaultTableModel modelo){
                Integer idTipoElemento = vistaaltaexpediente.getComboTipoElementosSecuestro().getId();
                String descTipoElemento = vistaaltaexpediente.getTextoDescSecuestro();
                String tipoElemento = vistaaltaexpediente.getComboTipoElementosSecuestro().getDescripcion();
@@ -205,7 +209,7 @@ public class ControladorFrameAltaExpediente implements ActionListener{
             jtableTramites.setModel(modeloTablaTramites);
         }
         
-        public void agregarTipoTramite(DefaultTableModel modelo){
+        public void agregarTipoTramiteTabla(DefaultTableModel modelo){
             
             TipoTramite tipoTramite = vistaaltaexpediente.getComboTipoTramite();
             String descripcionTramite = vistaaltaexpediente.getTextoDescripcionTramite();
@@ -218,8 +222,8 @@ public class ControladorFrameAltaExpediente implements ActionListener{
         }
         
         public void altaNuevoSumario() throws SQLException, ClassNotFoundException{
-            BDaltaexpediente = new BDAltaExpediente(con);
-            
+            BDaltaexpediente = new BDAltaExpediente(this.con);
+             this.con.conectar();
             
             String tipoExpediente = vistaaltaexpediente.getComboTipoExpediente();
             Integer nroSumario = vistaaltaexpediente.getTextoNroSumario();
@@ -227,46 +231,65 @@ public class ControladorFrameAltaExpediente implements ActionListener{
             Integer nroOrigen = vistaaltaexpediente.getComboOrigenOficina().getId();
             String origen = vistaaltaexpediente.getComboOrigenOficina().getNombre();
             Integer nroDestino = vistaaltaexpediente.getComboDestinoOficina().getId();
-            String destino = vistaaltaexpediente.getComboDestinoOficina().getNombre();
+            String descripcion = vistaaltaexpediente.getTextoDescripcionExpediente();
             String causa = vistaaltaexpediente.getTextoCausa();
             Integer libro = vistaaltaexpediente.getTextoNroLibro();
             Integer folio = vistaaltaexpediente.getTextoNroFolio();
            
-            
-            
-            BDaltaexpediente.altaExpediente(destino, nroOrigen, nroDestino, libro, folio);
-            BDaltaexpediente.altaSumario(nroSumario, añoSumario, causa);
            
-            altaTramite();
+            
+            BDaltaexpediente.altaExpediente(descripcion, nroOrigen, nroDestino, libro, folio);
+            
+            ultimoidexpediente = BDaltaexpediente.obtenerUltimoExpediente();
+            
+            BDaltaexpediente.altaSumario(ultimoidexpediente,nroSumario, añoSumario, causa);
+            
+           
+            
+            altaTramite(ultimoidexpediente);
             
             
-            
+            altaElementosExpediente(ultimoidexpediente);// PROBLEMA CON LA CONEXION DE LA BD DICE QUE YA ESTA CERRADA Y NO SE PUEDE EJECUTAR METODOS!!!!!!!!!
+           
+            this.con.cerrarConexion();
         }
         
-        public void altaTramite() throws SQLException, ClassNotFoundException{
-             ArrayList<LineaTramite> lineasTramites = new ArrayList<LineaTramite>();
+        public void altaTramite(Integer ultimoidexpediente) throws SQLException, ClassNotFoundException{
            
-            
+            ArrayList<LineaTramite> lineasTramites = new ArrayList<LineaTramite>();
+
             Integer plazo = vistaaltaexpediente.getTextoPlazo();
             Integer idEmpleado = vistaaltaexpediente.getComboResponsable().getId();
             
-            System.out.println("empleado ="+idEmpleado);
+            
             Integer idEstado = 1;
-            Integer ultimoId = BDaltaexpediente.obtenerUltimoExpediente();
-            System.out.println("Ultimo id expediente:"+ultimoId);
-           
-            BDaltaTramite = new BDAltaTramite(con);
-            BDaltaTramite.altaTramite(1, plazo, idEmpleado, idEstado, ultimoId);
-           
+          
+            BDaltaTramite = new BDAltaTramite(this.con);
+            
+            BDaltaTramite.altaTramite(1, plazo, idEmpleado, idEstado, ultimoidexpediente);
+            
+            Integer ultimoidTramite = BDaltaTramite.obtenerUltimoTramite();
+            
+            
             lineasTramites = obtenerTramitesTabla();
             
-            BDaltaTramite.altaLineas(lineasTramites);
-           
-            Integer ultimoidTramite = BDaltaTramite.obtenerUltimoTramite();
-           System.out.println("Ultimo id tramite: "+ultimoidTramite);
-           BDAltaHistoria altaHistoria = new BDAltaHistoria(con);
+            BDaltaTramite.altaLineas(lineasTramites,ultimoidTramite);
+          
+      
+           altaHistoria = new BDAltaHistoria(this.con);
            altaHistoria.altaHistoria(ultimoidTramite);
            
+        }
+        
+        public void altaElementosExpediente(Integer ultimoidexpediente) throws SQLException, ClassNotFoundException{
+            
+            ArrayList<Elemento> elementos = new ArrayList<Elemento>();
+            
+            elementos = this.obtenerElementosTabla();
+            
+            BDaltaelementos = new BDAltaElementosExpediente(this.con);
+            BDaltaelementos.AltaElementos(ultimoidexpediente,elementos);
+            
         }
         
         
@@ -277,20 +300,20 @@ public class ControladorFrameAltaExpediente implements ActionListener{
             
             TableModel tableModel = table.getModel();
             
-            int cols = tableModel.getColumnCount();
+           
             int rows = tableModel.getRowCount();
             
             for(int i=0; i<rows; i++){
-                for(int j=0;j<cols; j++){
+                
                     
                     Integer id = Integer.parseInt((String) tableModel.getValueAt(i, 4));
                     String descripcion = (String) tableModel.getValueAt(i, 3);
                     TipoElemento tipo = BDaltaexpediente.obtenerTipoElemento(id);
-                    Integer cantidad = (Integer) tableModel.getValueAt(i, 2);
+                    Integer cantidad =  Integer.parseInt((String) tableModel.getValueAt(i, 2));
                     Elemento elemento = new Elemento(descripcion,tipo,cantidad);
                     elementos.add(elemento);
    
-                }
+                
             }
             
             return elementos;
@@ -303,11 +326,11 @@ public class ControladorFrameAltaExpediente implements ActionListener{
             
             TableModel tableModel = table.getModel();
             
-            int cols = tableModel.getColumnCount();
+           
             int rows = tableModel.getRowCount();
             
             for(int i=0; i<rows; i++){//public Tramite(Integer numero,Integer plazo,ArrayList<TipoTramite> tramites, Historia historia) {
-                for(int j=0;j<cols; j++){
+                
                     
                     Integer idTipoTramite = Integer.parseInt((String) tableModel.getValueAt(i,0));
                     String descTipoTramite = (String) tableModel.getValueAt(i,1);
@@ -316,9 +339,7 @@ public class ControladorFrameAltaExpediente implements ActionListener{
                     LineaTramite linea = new LineaTramite(0, tipo, descLineaTramite);
                     
                     lineasTramites.add(linea);
-                   
-   
-                }
+
             }
             
             return lineasTramites;

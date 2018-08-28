@@ -44,7 +44,7 @@ public class BDAltaExpediente {
     
     public void altaExpediente(String descripcion,Integer nroOrigen, Integer nroDestino,Integer libro,Integer folio) throws SQLException, ClassNotFoundException{
         
-        con.conectar();
+        //con.conectar();
         
         String consulta = "INSERT INTO `expediente` "
                 +"(`idExpediente`,`descripcion`,`Oficina_idOficina_Origen`,`Oficina_idOficina_Destino`,`libro`,`folio`) "
@@ -64,14 +64,14 @@ public class BDAltaExpediente {
     
     
     
-    public void altaSumario(Integer nro, Integer año, String causa) throws SQLException, ClassNotFoundException{
+    public void altaSumario(Integer id,Integer nro, Integer año, String causa) throws SQLException, ClassNotFoundException{
        
        String consultaSumario;
-       ResultSet rs = null;
+      
        //con.conectar();
        
-        Integer id = obtenerUltimoExpediente();
-        System.out.println("Ultimo id "+id);
+        //Integer id = obtenerUltimoExpediente();
+        System.out.println("Ultimo id en BDAltaExpediente"+id);
        
        
         consultaSumario = "INSERT INTO `sumario` "
@@ -93,7 +93,7 @@ public class BDAltaExpediente {
        
         Integer id = null;
         ResultSet rs = null;
-        con.conectar();
+        //con.conectar();
         
         for(int i=0;i<elementos.size();i++){
            String consultaAltaExpediente = "INSERT INTO `elemento` "
@@ -116,13 +116,13 @@ public class BDAltaExpediente {
     
     public Integer obtenerUltimoExpediente() throws SQLException{
         
-        Integer id = null;
-        ResultSet rs = null;
-        String consultaID;
+       Integer id = null;
+       ResultSet rs = null;
+       String consultaID;
         
-        consultaID = "SELECT DISTINCT LAST_INSERT_ID() FROM expediente";
+       consultaID = "SELECT DISTINCT LAST_INSERT_ID() FROM expediente";
         
-        PreparedStatement st1 = this.con.getConexion().prepareStatement(consultaID);
+       PreparedStatement st1 = this.con.getConexion().prepareStatement(consultaID);
        rs = st1.executeQuery();
        
         
@@ -133,6 +133,8 @@ public class BDAltaExpediente {
          
         return id;
     }
+    
+    
     
    public TipoElemento obtenerTipoElemento(Integer id) throws SQLException, ClassNotFoundException{
        con.conectar();
@@ -148,7 +150,7 @@ public class BDAltaExpediente {
            tipo = new TipoElemento(rs.getInt("idTipoElemento"),rs.getString("descripcion"));
        }
        
-       //con.cerrarConexion();
+       con.cerrarConexion();
        return tipo;
    }
 }
