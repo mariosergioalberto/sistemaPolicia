@@ -11,7 +11,7 @@ public class Expediente {
     
     
     private Integer id;
-    
+    private TipoExpediente tipoexpediente;
     private String descripcion;
     private ArrayList<Elemento> elementos = new ArrayList<Elemento>();
     private ArrayList<Tramite> tramites = new ArrayList<Tramite>();
@@ -20,7 +20,8 @@ public class Expediente {
     private Integer libro;
     private Integer folio;
 
-    public Expediente(String descripcion, ArrayList<Elemento> elementos, ArrayList<Tramite> tramites,Integer libro,Integer folio) {
+    public Expediente(TipoExpediente tipoexpediente,String descripcion, ArrayList<Elemento> elementos, ArrayList<Tramite> tramites,Integer libro,Integer folio) {
+        this.tipoexpediente = tipoexpediente;
         this.libro = libro;
         this.folio = folio;
         this.descripcion = descripcion;
@@ -91,6 +92,14 @@ public class Expediente {
 
     public Integer getFolio() {
         return folio;
+    }
+
+    public void setTipoexpediente(TipoExpediente tipoexpediente) {
+        this.tipoexpediente = tipoexpediente;
+    }
+
+    public TipoExpediente getTipoexpediente() {
+        return tipoexpediente;
     }
    
 }

@@ -11,6 +11,7 @@ import modelo.Elemento;
 import modelo.Empleado;
 import modelo.Oficina;
 import modelo.TipoElemento;
+import modelo.TipoExpediente;
 import modelo.TipoTramite;
 
 /**
@@ -98,37 +99,25 @@ private SpinnerNumberModel nm = new SpinnerNumberModel();
         return Integer.parseInt(textoNroInterno.getText());
     }
     
-    public void setComboTipoExpediente(){
-        
+    public void setComboTipoExpediente(ArrayList<TipoExpediente> arrayTipoExpedientes){
+        for(int i = 0; i<arrayTipoExpedientes.size();i++){
+            this.comboTipoExpediente.addItem(arrayTipoExpedientes.get(i));
+        }
     }
     
-    public String getComboTipoExpediente(){
-        return ""+this.comboTipoExpediente.getSelectedItem();
+    public TipoExpediente getComboTipoExpediente(){
+        return (TipoExpediente) this.comboTipoExpediente.getSelectedItem();
     }
     
-    public void setTextoNroSumario(Integer NroSumario){
-        this.textoNroSumario.setText(String.valueOf(NroSumario));
+    
+ public void setTextoNroExpediente(String numero){
+        this.textoNroExpediente.setText(numero);
     }
     
-    public Integer getTextoNroSumario(){
-        return Integer.parseInt(this.textoNroSumario.getText());
+    public String getTextoNroExpediente(){
+        return this.textoNroExpediente.getText();
     }
-    
-    public void settextoAñoSumario(Integer año){
-        this.textoAñoSumario.setText(String.valueOf(año));
-    }
-    
-    public Integer getTextoAñoSumario(){
-        return Integer.parseInt(this.textoAñoSumario.getText());
-    }
-    
-    public void setTextNroOficio(Integer NroOficio){
-        this.textoNroOficio.setText(String.valueOf(NroOficio));
-    }
-    
-    public Integer getTextNroOficio(){
-        return Integer.parseInt(this.textoAñoSumario.getText());
-    }
+ 
     
     public void setTextoCausa(String causa){
         this.textoCausa.setText(causa);
@@ -277,8 +266,7 @@ private SpinnerNumberModel nm = new SpinnerNumberModel();
         jLabel2 = new javax.swing.JLabel();
         comboTipoExpediente = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        textoNroSumario = new javax.swing.JTextField();
-        textoAñoSumario = new javax.swing.JTextField();
+        textoNroExpediente = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         textoCausa = new javax.swing.JTextArea();
@@ -289,9 +277,6 @@ private SpinnerNumberModel nm = new SpinnerNumberModel();
         textoNroLibro = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
         textoNroFolio = new javax.swing.JTextField();
-        jLabel22 = new javax.swing.JLabel();
-        textoNroOficio = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
         comboOrigenOficina = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
         textoDescripcionExpediente = new javax.swing.JTextField();
@@ -432,18 +417,17 @@ private SpinnerNumberModel nm = new SpinnerNumberModel();
 
         jLabel2.setText("Tipo:");
 
-        comboTipoExpediente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione el tipo de expediente", "Sumario", "Oficio", "Nota", "Exp. especial" }));
         comboTipoExpediente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboTipoExpedienteActionPerformed(evt);
             }
         });
 
-        jLabel3.setText("N° Sumario:");
+        jLabel3.setText("Numero:");
 
-        textoNroSumario.addActionListener(new java.awt.event.ActionListener() {
+        textoNroExpediente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textoNroSumarioActionPerformed(evt);
+                textoNroExpedienteActionPerformed(evt);
             }
         });
 
@@ -466,10 +450,6 @@ private SpinnerNumberModel nm = new SpinnerNumberModel();
 
         jLabel21.setText("Folio:");
 
-        jLabel22.setText("N°Oficio:");
-
-        jLabel4.setText("Año:");
-
         jLabel7.setText("Descripción:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -482,13 +462,11 @@ private SpinnerNumberModel nm = new SpinnerNumberModel();
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel22)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel2)))
+                                .addGap(39, 39, 39)
+                                .addComponent(jLabel2))
                             .addComponent(jLabel8)
-                            .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(comboTipoExpediente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -499,16 +477,11 @@ private SpinnerNumberModel nm = new SpinnerNumberModel();
                                 .addGap(18, 18, 18)
                                 .addComponent(textoNroFolio, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(textoNroOficio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
-                                    .addComponent(textoNroSumario, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(textoAñoSumario, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(textoNroExpediente, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(69, 69, 69))
                             .addComponent(comboOrigenOficina, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
+                        .addGap(13, 13, 13)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(textoNroInterno, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -534,25 +507,19 @@ private SpinnerNumberModel nm = new SpinnerNumberModel();
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(textoNroInterno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(comboTipoExpediente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
-                        .addGap(2, 2, 2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(textoNroSumario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)
-                            .addComponent(textoAñoSumario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(textoNroExpediente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(14, 14, 14)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel22)
-                            .addComponent(textoNroOficio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(comboOrigenOficina, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboOrigenOficina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(15, 15, 15)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(textoNroLibro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel20)
@@ -562,14 +529,15 @@ private SpinnerNumberModel nm = new SpinnerNumberModel();
                             .addComponent(textoDescripcionExpediente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(84, 84, 84)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(14, 14, 14)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel9)
-                                    .addComponent(comboDestinoOficina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(30, 30, 30)))
+                                    .addComponent(comboDestinoOficina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel9))
+                                .addGap(3, 3, 3))
+                            .addComponent(jLabel5))
+                        .addGap(34, 34, 34)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -754,9 +722,9 @@ private SpinnerNumberModel nm = new SpinnerNumberModel();
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void textoNroSumarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoNroSumarioActionPerformed
+    private void textoNroExpedienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoNroExpedienteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textoNroSumarioActionPerformed
+    }//GEN-LAST:event_textoNroExpedienteActionPerformed
 
     private void comboEstadoTramiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboEstadoTramiteActionPerformed
         // TODO add your handling code here:
@@ -767,21 +735,7 @@ this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void comboTipoExpedienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTipoExpedienteActionPerformed
-    if(comboTipoExpediente.getSelectedItem().equals("Sumario")){
-        textoNroSumario.setEditable(true);
-        textoAñoSumario.setEditable(true);
-        textoNroOficio.setEditable(false);
-    }
-      if(comboTipoExpediente.getSelectedItem().equals("Oficio")){
-        textoNroOficio.setEditable(true);
-        textoNroSumario.setEditable(true);
-        textoAñoSumario.setEditable(true);
-    }
-      if(comboTipoExpediente.getSelectedItem().equals("Nota")){
-        textoNroOficio.setEditable(false);
-        textoNroSumario.setEditable(false);
-        textoAñoSumario.setEditable(false);
-    }
+    
     }//GEN-LAST:event_comboTipoExpedienteActionPerformed
 
     private void textoCausaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textoCausaKeyTyped
@@ -807,7 +761,7 @@ this.dispose();        // TODO add your handling code here:
     private javax.swing.JComboBox<Oficina> comboOrigenOficina;
     private javax.swing.JComboBox<Empleado> comboResponsable;
     private javax.swing.JComboBox<TipoElemento> comboTipoElementoSecuestro;
-    private javax.swing.JComboBox<String> comboTipoExpediente;
+    private javax.swing.JComboBox<TipoExpediente> comboTipoExpediente;
     private javax.swing.JComboBox<TipoTramite> comboTipoTramite;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -824,10 +778,8 @@ this.dispose();        // TODO add your handling code here:
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -847,17 +799,15 @@ this.dispose();        // TODO add your handling code here:
     private javax.swing.JSpinner spinnerCantidadElementos;
     private javax.swing.JTable tablaElementosSecuestro;
     private javax.swing.JTable tablaTiposDeTramites;
-    private javax.swing.JTextField textoAñoSumario;
     private javax.swing.JTextArea textoCausa;
     private javax.swing.JTextField textoDescSecuestro;
     private javax.swing.JTextField textoDescripcionExpediente;
     private javax.swing.JTextField textoDescripcionTramite;
     private javax.swing.JLabel textoFechaHoy;
+    private javax.swing.JTextField textoNroExpediente;
     private javax.swing.JTextField textoNroFolio;
     private javax.swing.JTextField textoNroInterno;
     private javax.swing.JTextField textoNroLibro;
-    private javax.swing.JTextField textoNroOficio;
-    private javax.swing.JTextField textoNroSumario;
     private javax.swing.JTextField textoPlazo;
     // End of variables declaration//GEN-END:variables
 

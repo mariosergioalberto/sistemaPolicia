@@ -21,6 +21,7 @@ import modelo.Oficina;
 
 import modelo.Persona;
 import modelo.TipoElemento;
+import modelo.TipoExpediente;
 import modelo.TipoTramite;
 
 import persistencia.BDAltaElementosExpediente;
@@ -30,6 +31,7 @@ import persistencia.BDAltaTramite;
 import persistencia.BDMostrarListaElementos;
 import persistencia.BDMostrarListaEmpleados;
 import persistencia.BDMostrarListaOficina;
+import persistencia.BDMostrarListaTipoExpedientes;
 import persistencia.BDMostrarListaTiposTramites;
 import persistencia.MySqlConexion;
 import vista.VistaAltaExpediente;
@@ -70,6 +72,7 @@ public class ControladorFrameAltaExpediente implements ActionListener{
         asignarFechaHoy();
         obtenerTiposTramites();
         obtenerElementos();
+        obtenerTipoExpedientes();
         modelarTablaElementos(vistaaltaexpediente.getTablaElementosSecuestros());
         modelarTablaTramites(vistaaltaexpediente.getTablaTiposDeTramites());
         
@@ -154,7 +157,23 @@ public class ControladorFrameAltaExpediente implements ActionListener{
         vistaaltaexpediente.setComboTipoElementosSecuestro(tiposElementos);
     }
     
-  
+  public void obtenerTipoExpedientes() throws SQLException, ClassNotFoundException{
+      ArrayList<TipoExpediente> tiposExpedientes = new ArrayList<TipoExpediente>();
+      this.con.conectar();
+      
+      BDMostrarListaTipoExpedientes rsListaTipoExpedientes = new BDMostrarListaTipoExpedientes(this.con);
+      
+      ResultSet rs = rsListaTipoExpedientes.rsListaTipoExpedientes();
+      
+      while(rs.next()){
+          TipoExpediente tipoexpediente = new TipoExpediente(rs.getInt("idTipoExpediente"),rs.getString("descripcion"));
+          tiposExpedientes.add(tipoexpediente);
+      }
+      this.con.cerrarConexion();
+      vistaaltaexpediente.setComboTipoExpediente(tiposExpedientes);
+      
+  }
+    
     public void asignarFechaHoy(){
         fechahoy = new Date();
         SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy"); 
@@ -225,17 +244,17 @@ public class ControladorFrameAltaExpediente implements ActionListener{
             BDaltaexpediente = new BDAltaExpediente(this.con);
              this.con.conectar();
             
-            String tipoExpediente = vistaaltaexpediente.getComboTipoExpediente();
-            Integer nroSumario = vistaaltaexpediente.getTextoNroSumario();
-            Integer añoSumario = vistaaltaexpediente.getTextoAñoSumario();
-            Integer nroOrigen = vistaaltaexpediente.getComboOrigenOficina().getId();
-            String origen = vistaaltaexpediente.getComboOrigenOficina().getNombre();
-            Integer nroDestino = vistaaltaexpediente.getComboDestinoOficina().getId();
+            
+            String nroExpediente = vistaaltaexpediente.getTextoNroExpediente();
             String descripcion = vistaaltaexpediente.getTextoDescripcionExpediente();
-            String causa = vistaaltaexpediente.getTextoCausa();
+            Integer nroOrigen = vistaaltaexpediente.getComboOrigenOficina().getId();
+            Integer nroDestino = vistaaltaexpediente.getComboDestinoOficina().getId();
             Integer libro = vistaaltaexpediente.getTextoNroLibro();
             Integer folio = vistaaltaexpediente.getTextoNroFolio();
-           
+            String causa = vistaaltaexpediente.getTextoCausa();
+            
+            Integer plazo = vistaaltaexpediente.getTextoPlazo();
+            Integer tipoExpediente = vistaaltaexpediente.getComboTipoExpediente().getId();
            
             
             BDaltaexpediente.altaExpediente(descripcion, nroOrigen, nroDestino, libro, folio);

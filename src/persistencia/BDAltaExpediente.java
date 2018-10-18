@@ -42,53 +42,60 @@ public class BDAltaExpediente {
         
     }
     
-    public void altaExpediente(String descripcion,Integer nroOrigen, Integer nroDestino,Integer libro,Integer folio) throws SQLException, ClassNotFoundException{
+    public void altaExpediente(String numeroExpediente, String descripcion,Integer nroOrigen, Integer nroDestino,Integer libro,Integer folio,String expedienteCausa, Integer expedientePlazo,Integer idTipoExpediente) throws SQLException, ClassNotFoundException{
         
         //con.conectar();
         
         String consulta = "INSERT INTO `expediente` "
-                +"(`idExpediente`,`descripcion`,`Oficina_idOficina_Origen`,`Oficina_idOficina_Destino`,`libro`,`folio`) "
+                +"(`idExpediente`,`expedienteNro`,`descripcion`,`Oficina_idOficina_Origen`,`Oficina_idOficina_Destino`,`libro`,`folio`,`expedienteCausa`,`expedientePlazo`,`TipoExpediente_idTipoExpediente`) "
                 + "VALUES (NULL,"
+                + "'"+numeroExpediente+"',"
                 + "'"+descripcion+"',"
                 + nroOrigen+","
                 + nroDestino+","
                 + libro+","
-                + folio+")";
+                + folio+","
+                + "'"+expedienteCausa+"',"
+                + expedientePlazo+","
+                + idTipoExpediente+","
+                +")";
         
-        PreparedStatement st = this.con.getConexion().prepareStatement(consulta);
         
-        st.execute();
-        
+        System.out.println(consulta);
+//        PreparedStatement st = this.con.getConexion().prepareStatement(consulta);
+//        
+//        st.execute();
+//        
         //con.cerrarConexion();
     }
     
     
-    
-    public void altaSumario(Integer id,Integer nro, Integer año, String causa) throws SQLException, ClassNotFoundException{
-       
-       String consultaSumario;
-      
-       //con.conectar();
-       
-        //Integer id = obtenerUltimoExpediente();
-        System.out.println("Ultimo id en BDAltaExpediente"+id);
-       
-       
-        consultaSumario = "INSERT INTO `sumario` "
-                +"(`idSumario`,`nro`,`año`,`causa`,`Expediente_idExpediente`) "
-                + "VALUES (NULL,"
-                +nro+","
-                +año+","
-                +"'"+causa+"',"
-                +id+")";
-
-       PreparedStatement st2 = this.con.getConexion().prepareStatement(consultaSumario);
-       st2.execute();
-        
-      // con.cerrarConexion();
-        
-    }
-    
+//    
+//    public void altaSumario(Integer id,Integer nro, Integer año, String causa) throws SQLException, ClassNotFoundException{
+//       
+//       String consultaSumario;
+//      
+//       //con.conectar();
+//       
+//        //Integer id = obtenerUltimoExpediente();
+//        System.out.println("Ultimo id en BDAltaExpediente"+id);
+//       
+//       
+//        consultaSumario = "INSERT INTO `sumario` "
+//                +"(`idSumario`,`nro`,`año`,`causa`,`Expediente_idExpediente`) "
+//                + "VALUES (NULL,"
+//                +nro+","
+//                +año+","
+//                +"'"+causa+"',"
+//                +id+")";
+//
+//       PreparedStatement st2 = this.con.getConexion().prepareStatement(consultaSumario);
+//       st2.execute();
+//        
+//      // con.cerrarConexion();
+//        
+//    }
+//    
     public void altaElementos(ArrayList<Elemento> elementos) throws SQLException, ClassNotFoundException{
        
         Integer id = null;
