@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import modelo.Elemento;
+import modelo.Expediente;
 import modelo.Oficina;
 import modelo.TipoElemento;
 
@@ -42,59 +43,35 @@ public class BDAltaExpediente {
         
     }
     
-    public void altaExpediente(String numeroExpediente, String descripcion,Integer nroOrigen, Integer nroDestino,Integer libro,Integer folio,String expedienteCausa, Integer expedientePlazo,Integer idTipoExpediente) throws SQLException, ClassNotFoundException{
+     public void altaExpediente(Expediente expediente) throws SQLException, ClassNotFoundException{
         
         //con.conectar();
         
         String consulta = "INSERT INTO `expediente` "
                 +"(`idExpediente`,`expedienteNro`,`descripcion`,`Oficina_idOficina_Origen`,`Oficina_idOficina_Destino`,`libro`,`folio`,`expedienteCausa`,`expedientePlazo`,`TipoExpediente_idTipoExpediente`) "
                 + "VALUES (NULL,"
-                + "'"+numeroExpediente+"',"
-                + "'"+descripcion+"',"
-                + nroOrigen+","
-                + nroDestino+","
-                + libro+","
-                + folio+","
-                + "'"+expedienteCausa+"',"
-                + expedientePlazo+","
-                + idTipoExpediente+","
+                + "'"+expediente.getNroExpediente()+"',"
+                + "'"+expediente.getDescripcion()+"',"
+                + expediente.getOrigenOficina().getId()+","
+                + expediente.getDestinoOficina().getId()+","
+                + expediente.getLibro()+","
+                + expediente.getFolio()+","
+                + "'"+expediente.getCausa()+"',"
+                + expediente.getPlazo()+","
+                + expediente.getTipoexpediente().getId()
                 +")";
         
         
         System.out.println(consulta);
-//        PreparedStatement st = this.con.getConexion().prepareStatement(consulta);
-//        
-//        st.execute();
-//        
+        PreparedStatement st = this.con.getConexion().prepareStatement(consulta);
+        
+        st.execute();
+        
         //con.cerrarConexion();
     }
     
     
-//    
-//    public void altaSumario(Integer id,Integer nro, Integer año, String causa) throws SQLException, ClassNotFoundException{
-//       
-//       String consultaSumario;
-//      
-//       //con.conectar();
-//       
-//        //Integer id = obtenerUltimoExpediente();
-//        System.out.println("Ultimo id en BDAltaExpediente"+id);
-//       
-//       
-//        consultaSumario = "INSERT INTO `sumario` "
-//                +"(`idSumario`,`nro`,`año`,`causa`,`Expediente_idExpediente`) "
-//                + "VALUES (NULL,"
-//                +nro+","
-//                +año+","
-//                +"'"+causa+"',"
-//                +id+")";
-//
-//       PreparedStatement st2 = this.con.getConexion().prepareStatement(consultaSumario);
-//       st2.execute();
-//        
-//      // con.cerrarConexion();
-//        
-//    }
+
 //    
     public void altaElementos(ArrayList<Elemento> elementos) throws SQLException, ClassNotFoundException{
        
@@ -144,7 +121,7 @@ public class BDAltaExpediente {
     
     
    public TipoElemento obtenerTipoElemento(Integer id) throws SQLException, ClassNotFoundException{
-       con.conectar();
+       ////con.conectar();
        TipoElemento tipo = null;
        ResultSet rs = null;
        
@@ -157,7 +134,7 @@ public class BDAltaExpediente {
            tipo = new TipoElemento(rs.getInt("idTipoElemento"),rs.getString("descripcion"));
        }
        
-       con.cerrarConexion();
+       ///con.cerrarConexion();
        return tipo;
    }
 }

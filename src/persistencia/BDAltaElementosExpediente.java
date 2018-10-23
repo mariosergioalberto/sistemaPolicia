@@ -20,7 +20,7 @@ public class BDAltaElementosExpediente {
     }
     
     public void AltaElementos(Integer idultimoexpediente,ArrayList<Elemento> elementos) throws SQLException, ClassNotFoundException{
-       con.conectar();
+      ////////////////// con.conectar();
         
         for(int i=0;i<elementos.size();i++){
             
@@ -36,7 +36,7 @@ public class BDAltaElementosExpediente {
             st.execute();
         }
         
-       con.cerrarConexion();
+       ////////////con.cerrarConexion();
     }
     
     

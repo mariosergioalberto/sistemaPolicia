@@ -1,58 +1,55 @@
 
 package modelo;
 
-import java.util.ArrayList;
-import java.util.Date;
 
 /**
- *
  * @author Laboratio
  */
 public class Tramite {
-    private Integer id;
-    
-    private Integer plazo;
-    
-    private Historia historia;
-    private ArrayList<TipoTramite> tramites;
+    private TipoTramite tipotramite;
+    private String descripcion;
+    private Empleado empleado;
+    private Integer estado;
 
-    public Tramite(Integer numero,Integer plazo,ArrayList<TipoTramite> tramites, Historia historia) {
-        this.id = numero;
-       
-        this.plazo = plazo;
-       
-        this.tramites = tramites;
-        this.historia = historia;
+    public Tramite(TipoTramite tipotramite,String descripcion,Empleado empleado,Integer estado) {
+        this.tipotramite = tipotramite;
+        this.descripcion = descripcion;
+        this.empleado = empleado;
+        this.estado = estado;
     }
 
-    public void setId(Integer numero) {
-        this.id = numero;
+    public TipoTramite getTipotramite() {
+        return tipotramite;
     }
 
-  
-    public void setPlazo(Integer plazo) {
-        this.plazo = plazo;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-  
-    public void setHistoria(Historia historia) {
-        this.historia = historia;
+    public Empleado getEmpleado() {
+        return empleado;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getEstado() {
+        return estado;
     }
 
-
-
-    public Integer getPlazo() {
-        return plazo;
+    public void setTipotramite(TipoTramite tipotramite) {
+        this.tipotramite = tipotramite;
     }
 
-
-    public Historia getHistoria() {
-        return historia;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
+
+    public void setEmpleado(Empleado empleado) {
+        this.empleado = empleado;
+    }
+
+    public void setEstado(Integer estado) {
+        this.estado = estado;
+    }
+
     
     
 }

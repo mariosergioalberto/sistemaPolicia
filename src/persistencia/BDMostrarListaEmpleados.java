@@ -38,8 +38,9 @@ public class BDMostrarListaEmpleados {
         while(rs.next()){
             persona = new Persona(rs.getString("nombre"),rs.getString("apellido"),rs.getInt("dni"),rs.getString("fecnac"),rs.getString("direccion"));
             
+            
         }
-        System.out.println();
+        System.out.println(persona);
         return persona;
     }
     

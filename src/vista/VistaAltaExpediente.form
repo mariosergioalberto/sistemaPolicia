@@ -372,10 +372,7 @@
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="textoNroFolio" min="-2" pref="57" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="textoNroExpediente" min="-2" pref="71" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="textoNroExpediente" alignment="0" min="-2" pref="71" max="-2" attributes="0"/>
                                   <Component id="comboOrigenOficina" min="-2" pref="213" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -447,11 +444,10 @@
                                           <Component id="comboDestinoOficina" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
