@@ -48,7 +48,7 @@ public class BDAltaExpediente {
         //con.conectar();
         
         String consulta = "INSERT INTO `expediente` "
-                +"(`idExpediente`,`expedienteNro`,`descripcion`,`Oficina_idOficina_Origen`,`Oficina_idOficina_Destino`,`libro`,`folio`,`expedienteCausa`,`expedientePlazo`,`TipoExpediente_idTipoExpediente`) "
+                +"(`idExpediente`,`expedienteNro`,`descripcion`,`Oficina_idOficina_Origen`,`Oficina_idOficina_Destino`,`libro`,`folio`,`expedienteCausa`,`expedientePlazo`,`TipoExpediente_idTipoExpediente`,`Expediente_idExpedienteEstado`) "
                 + "VALUES (NULL,"
                 + "'"+expediente.getNroExpediente()+"',"
                 + "'"+expediente.getDescripcion()+"',"
@@ -58,7 +58,8 @@ public class BDAltaExpediente {
                 + expediente.getFolio()+","
                 + "'"+expediente.getCausa()+"',"
                 + expediente.getPlazo()+","
-                + expediente.getTipoexpediente().getId()
+                + expediente.getTipoexpediente().getId()+","
+                + 1
                 +")";
         
         
