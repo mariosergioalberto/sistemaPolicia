@@ -38,10 +38,12 @@ public class BDObtenerEmpleado {
        
        
        while(rs.next()){
-          System.out.println(rs.getInt("Persona_idPersona")); 
+          
           persona = obtenerpersona.obtenerPersona(rs.getInt("Persona_idPersona"));
           
            empleado = new Empleado(rs.getInt("legajo"),persona.getNombre(),persona.getApellido(),persona.getDni(),persona.getFechaNac(),persona.getDireccion(),rs.getString("rango"));
+           empleado.setId(rs.getInt("idEmpleado"));
+           System.out.println("ID de empleado "+empleado.getId());
        }
       
        

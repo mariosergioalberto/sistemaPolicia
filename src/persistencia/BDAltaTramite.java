@@ -25,14 +25,15 @@ public class BDAltaTramite {
        for(int i=0;i<tramites.size();i++){
            
            String consulta = "INSERT INTO `tramite` "
-                + "(`idTramite`,`Empleado_idEmpleado`,`Expediente_idExpediente`,`TipoTramite_idTipoTramite`,`Estado_idEstado`,`descripcion`) "
-                + "VALUES (NULL,"+tramites.get(i).getEmpleado().getId()
-                +","+idExpediente
-                +","+tramites.get(i).getTipotramite().getId()
-                +","+tramites.get(i).getEstado()
+                + "(`idTramite`,`TipoTramite_idTipoTramite`,`descripcion`,`Empleado_idEmpleado`,`Expediente_idExpediente`,`Estado_idEstado`) "
+                + "VALUES (NULL,"+tramites.get(i).getTipotramite().getId()
                 +",'"+tramites.get(i).getDescripcion()
-                +"');";
+                +"',"+tramites.get(i).getEmpleado().getId()
+                +","+idExpediente
+                +","+tramites.get(i).getEstado()
+                +");";
         
+           System.out.println(consulta);
         PreparedStatement st = this.con.getConexion().prepareStatement(consulta);
         st.execute();
         

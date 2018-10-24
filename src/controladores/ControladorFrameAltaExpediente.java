@@ -16,6 +16,7 @@ import javax.swing.table.TableModel;
 import modelo.Elemento;
 import modelo.Empleado;
 import modelo.Expediente;
+import modelo.Historia;
 
 
 import modelo.Oficina;
@@ -36,6 +37,7 @@ import persistencia.BDMostrarListaOficina;
 import persistencia.BDMostrarListaTipoExpedientes;
 import persistencia.BDMostrarListaTiposTramites;
 import persistencia.BDObtenerEmpleado;
+import persistencia.BDObtenerExpediente;
 import persistencia.MySqlConexion;
 import vista.VistaAltaExpediente;
 
@@ -63,6 +65,9 @@ public class ControladorFrameAltaExpediente implements ActionListener{
     private Integer ultimoidexpediente;
     private BDAltaHistoria altaHistoria;
     private BDAltaElementosExpediente BDaltaelementos;
+    private BDObtenerExpediente bdobtenerexp;
+    
+    private Historia historia;
     
     public ControladorFrameAltaExpediente(MySqlConexion con) throws SQLException, ClassNotFoundException{
         this.vistaaltaexpediente = new VistaAltaExpediente();
@@ -73,6 +78,7 @@ public class ControladorFrameAltaExpediente implements ActionListener{
         obtenerOficinas();
         obtenerEmpleados();
         asignarFechaHoy();
+        obtenerUltimoidExpediente();
         obtenerTiposTramites();
         obtenerElementos();
         obtenerTipoExpedientes();
@@ -102,6 +108,15 @@ public class ControladorFrameAltaExpediente implements ActionListener{
         }
     }
    
+    
+    public void obtenerUltimoidExpediente() throws SQLException, ClassNotFoundException{
+        this.con.conectar();
+        bdobtenerexp = new BDObtenerExpediente(con);
+        Integer ultimoid = bdobtenerexp.obtenerUltimoExpediente();
+        
+        vistaaltaexpediente.setTextoNroInterno(String.valueOf(ultimoid+1));
+        this.con.cerrarConexion();
+    }
     
     
     public void obtenerOficinas() throws SQLException, ClassNotFoundException{
@@ -223,7 +238,7 @@ public class ControladorFrameAltaExpediente implements ActionListener{
         
         public void modelarTablaTramites(JTable jtableTramites){
             String titulos[] = {
-                "idTipoTramite","Tipo Tramite","Descripcion Tramite","idEmpleado","Nombre empleado","apellido"
+                "idTipoTramite","Tipo Tramite","Descripcion Tramite","idEmpleado","Nombre empleado"
             };
            
             modeloTablaTramites.setColumnIdentifiers(titulos);
@@ -239,8 +254,8 @@ public class ControladorFrameAltaExpediente implements ActionListener{
             registroTablaTramites[1] = tipoTramite.getDescripcion();
             registroTablaTramites[2] = descripcionTramite;
             registroTablaTramites[3] = String.valueOf(empleado.getId());
+            registroTablaTramites[4] = empleado.toString();
             
-            registroTablaTramites[4] = empleado.getApellido();
             
             modelo.addRow(registroTablaTramites); 
             
@@ -248,7 +263,9 @@ public class ControladorFrameAltaExpediente implements ActionListener{
         
         public void altaNuevoExpediente() throws SQLException, ClassNotFoundException{
             BDaltaexpediente = new BDAltaExpediente(this.con);
-             this.con.conectar();
+            altaHistoria = new BDAltaHistoria(con);
+            
+            this.con.conectar();
             
             
             String nroExpediente = vistaaltaexpediente.getTextoNroExpediente();
@@ -270,13 +287,20 @@ public class ControladorFrameAltaExpediente implements ActionListener{
             Expediente expe = new Expediente(nroExpediente,tipoExpediente,descripcion,elementos,tramites,libro,folio,plazo,causa,oficinaOrigen,oficinaDestino);
             BDaltaexpediente.altaExpediente(expe);
             
-            ultimoidexpediente = BDaltaexpediente.obtenerUltimoExpediente();
+            ultimoidexpediente = BDaltaexpediente.obtenerUltimoExpedienteAgregadoSesion();
  
             altaTramite(ultimoidexpediente);
+            altaElementosExpediente(ultimoidexpediente);
+            
+            String descripcionHistoria = "Expediente recibido";
+            historia = new Historia(fechahoy, descripcionHistoria); //public Historia(Date fechaHora, String descripcion) {
+            altaHistoria.altaHistoria(ultimoidexpediente,historia);
             
             
-            altaElementosExpediente(ultimoidexpediente);// PROBLEMA CON LA CONEXION DE LA BD DICE QUE YA ESTA CERRADA Y NO SE PUEDE EJECUTAR METODOS!!!!!!!!!
-           
+            
+            
+            
+            
             this.con.cerrarConexion();
         }
         
@@ -286,14 +310,11 @@ public class ControladorFrameAltaExpediente implements ActionListener{
 
          
             tramites = obtenerTramitesTabla();
-            
-          
+         
             BDaltaTramite = new BDAltaTramite(this.con);
             
             BDaltaTramite.altaTramite(tramites, ultimoidexpediente);
-            
-            
-            
+
         }
         
         public void altaElementosExpediente(Integer ultimoidexpediente) throws SQLException, ClassNotFoundException{
@@ -354,9 +375,9 @@ public class ControladorFrameAltaExpediente implements ActionListener{
                     String descTramite = (String) tableModel.getValueAt(i, 2);
                     Integer idEmpleado = Integer.parseInt((String) tableModel.getValueAt(i, 3));
                     TipoTramite tipo = new TipoTramite(idTipoTramite, descTipoTramite); 
-                    
+                    System.out.println("id en el metodo obtener Tramites Tabla es " + idEmpleado);
                     empleado = bdobtenerempleado.obtenerEmpleado(idEmpleado);
-                    
+                    System.out.println("id en el metodo obtener" + empleado.toString());
                     Tramite tramite = new Tramite(tipo, descTramite,empleado,1);
                     //public Tramite(TipoTramite tipotramite,String descripcion,Empleado empleado,String estado) {
                     tramites.add(tramite);

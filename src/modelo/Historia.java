@@ -1,36 +1,48 @@
-
 package modelo;
 
-import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
  * @author Laboratio
  */
 public class Historia {
-    
     private Integer id;
-    private ArrayList<LineaHistoria> historia = new ArrayList<LineaHistoria>();
+    private Date fechaHora;
+    
+    private String descripcion;
 
-    public Historia(Integer id) {
+    public Historia(Date fechaHora, String descripcion) {
         this.id = id;
+        this.fechaHora = fechaHora;
+        
+        this.descripcion = descripcion;
     }
 
     public void setId(Integer id) {
         this.id = id;
     }
 
-    public void setHistoria(ArrayList<LineaHistoria> historia) {
-        this.historia = historia;
+    public void setFechaHora(Date fecha) {
+        this.fechaHora = fechaHora;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public Integer getId() {
         return id;
     }
 
-    public ArrayList<LineaHistoria> getHistoria() {
-        return historia;
+    public Date getFechaHora() {
+        return fechaHora;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
     }
     
-   
+    
+    
 }

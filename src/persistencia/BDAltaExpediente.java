@@ -98,7 +98,7 @@ public class BDAltaExpediente {
         
     }
     
-    public Integer obtenerUltimoExpediente() throws SQLException{
+    public Integer obtenerUltimoExpedienteAgregadoSesion() throws SQLException{
         
        Integer id = null;
        ResultSet rs = null;
@@ -118,7 +118,7 @@ public class BDAltaExpediente {
         return id;
     }
     
-    
+ 
     
    public TipoElemento obtenerTipoElemento(Integer id) throws SQLException, ClassNotFoundException{
        ////con.conectar();

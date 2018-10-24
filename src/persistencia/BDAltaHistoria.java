@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import modelo.Historia;
 
 /**
  *
@@ -20,17 +21,17 @@ public class BDAltaHistoria {
         this.con = con;
     }
     
-    public void altaHistoria(Integer idTramite) throws SQLException, ClassNotFoundException{
-       String descripcion = "Entrada de expediente";
+    public void altaHistoria(Integer idExpediente,Historia historia) throws SQLException, ClassNotFoundException{
+       
       
         
         
         String consulta = "INSERT INTO `historia` "
-                +"(`idHistoria`,`fecha`,`descripcion`,`Tramite_idTramite`) "
+                +"(`idHistoria`,`fecha`,`descripcion`,`Expediente_idExpediente`) "
                 + "VALUES (NULL,"
                 + "NOW(),'"
-                + descripcion+"',"
-                + idTramite+")";
+                + historia.getDescripcion()+"',"
+                + idExpediente+")";
         
         PreparedStatement st = this.con.getConexion().prepareStatement(consulta);
         
