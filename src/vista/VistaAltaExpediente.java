@@ -30,6 +30,10 @@ private SpinnerNumberModel nm = new SpinnerNumberModel();
     public VistaAltaExpediente() {
         
         initComponents();
+        
+        
+        
+        
         this.setLocationRelativeTo(null);
         comboOrigenOficina.removeAllItems();
         comboDestinoOficina.removeAllItems();      
@@ -44,7 +48,8 @@ private SpinnerNumberModel nm = new SpinnerNumberModel();
        nm.setMaximum(100);
        spinnerCantidadElementos.setModel(nm);
        spinnerCantidadElementos.setValue(1);
-      
+      textoCausa.setLineWrap(true);
+      textoCausa.setWrapStyleWord(true);
     }
 
   
