@@ -47,9 +47,7 @@ public class ControladorFrameListaEmpleados implements ActionListener{
         this.con.conectar();
         
         bdmostrarEpleados = new BDMostrarListaEmpleados(con);
-        
-        
-        
+  
         DefaultTableModel modelo = new DefaultTableModel();
         String titulos[] = {"idPersona","idEmpleado","legajo","Nombre","Apellido","dni","Fecha nacim","direccion","Rango"};
         modelo.setColumnIdentifiers(titulos);

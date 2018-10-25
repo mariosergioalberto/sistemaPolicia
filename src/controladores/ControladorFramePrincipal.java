@@ -21,6 +21,7 @@ public class ControladorFramePrincipal implements ActionListener {
   private ControladorFrameListaEmpleados controladorFrameListaEmpleado;
   private ControladorFrameListaOficina controladorframelistaoficina;
   private ControladorFrameAltaExpediente controladorframealtaexpediente;
+  private ControladorFrameListaExpediente controladorframelistaexpediente;
   
   private MySqlConexion con;
   
@@ -76,6 +77,16 @@ public class ControladorFramePrincipal implements ActionListener {
                Logger.getLogger(ControladorFramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
            }
            
+       }
+       
+       if(e.getActionCommand().equals(pantallaPrincipal.BTN_BUSCAREXPEDIENTE)){
+           try {
+               controladorframelistaexpediente = new ControladorFrameListaExpediente(con);
+           } catch (SQLException ex) {
+               Logger.getLogger(ControladorFramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+           } catch (ClassNotFoundException ex) {
+               Logger.getLogger(ControladorFramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+           }
        }
        
        

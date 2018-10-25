@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import modelo.Elemento;
 import modelo.Expediente;
 import modelo.Oficina;
@@ -48,7 +49,7 @@ public class BDAltaExpediente {
         //con.conectar();
         
         String consulta = "INSERT INTO `expediente` "
-                +"(`idExpediente`,`expedienteNro`,`descripcion`,`Oficina_idOficina_Origen`,`Oficina_idOficina_Destino`,`libro`,`folio`,`expedienteCausa`,`expedientePlazo`,`TipoExpediente_idTipoExpediente`,`Expediente_idExpedienteEstado`) "
+                +"(`idExpediente`,`expedienteNro`,`descripcion`,`Oficina_idOficina_Origen`,`Oficina_idOficina_Destino`,`libro`,`folio`,`expedienteCausa`,`expedientePlazo`,`TipoExpediente_idTipoExpediente`,`Expediente_idExpedienteEstado`,`Expediente_FechaLlegada`,`Expediente_FechaEnvio`) "
                 + "VALUES (NULL,"
                 + "'"+expediente.getNroExpediente()+"',"
                 + "'"+expediente.getDescripcion()+"',"
@@ -59,7 +60,8 @@ public class BDAltaExpediente {
                 + "'"+expediente.getCausa()+"',"
                 + expediente.getPlazo()+","
                 + expediente.getTipoexpediente().getId()+","
-                + 1
+                + 1+","
+                + "NOW(),NULL"
                 +")";
         
         
