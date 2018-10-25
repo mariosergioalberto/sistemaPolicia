@@ -25,6 +25,7 @@ public class ControladorFrameListaExpediente implements ActionListener{
     // Controlador de la pantalla de mostrar detalle falta !!!!!!!!!!!!!!!!!!!
     private MySqlConexion con;
     private BDMostrarListaExpedientes bdmostrarlistaexpedientes;
+    private ControladorFrameDetalleExpediente controladorFrameDetalleExpediente;
     
     public ControladorFrameListaExpediente(MySqlConexion con) throws SQLException, ClassNotFoundException{
         this.vistaexpedientelista = new VistaExpedientesLista();
@@ -37,7 +38,9 @@ public class ControladorFrameListaExpediente implements ActionListener{
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        
+        if(e.getActionCommand().equals(vistaexpedientelista.botonMostrarDetalle)){
+            controladorFrameDetalleExpediente = new ControladorFrameDetalleExpediente(con);
+        }
     }
     
  public void listarExpedientes(JTable tablaExpedientes) throws SQLException, ClassNotFoundException{

@@ -193,7 +193,8 @@ public class ControladorFrameAltaExpediente implements ActionListener{
     public void asignarFechaHoy(){
         fechahoy = new Date();
         SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy"); 
-        vistaaltaexpediente.setTextoFechaHoy(formateador.format(fechahoy)); 
+//        vistaaltaexpediente.setTextoFechaHoy(formateador.format(fechahoy));
+        vistaaltaexpediente.setTextoFechaLlegada(formateador.format(fechahoy));
     }
     
     public void obtenerTiposTramites() throws SQLException, ClassNotFoundException{

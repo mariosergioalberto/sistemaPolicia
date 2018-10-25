@@ -22,6 +22,9 @@ public class VistaExpedientesLista extends javax.swing.JFrame {
         
         initComponents();
         this.setLocationRelativeTo(null);
+        btn_BuscarNroExp.setActionCommand(botonBuscar);
+        btn_busquedaAvanzada.setActionCommand(botonBusquedaAvanzada);
+        btn_mostrarDetalle.setActionCommand(botonMostrarDetalle);
     }
 
     
