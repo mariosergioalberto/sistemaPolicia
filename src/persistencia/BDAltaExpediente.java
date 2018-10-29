@@ -49,7 +49,7 @@ public class BDAltaExpediente {
         //con.conectar();
         
         String consulta = "INSERT INTO `expediente` "
-                +"(`idExpediente`,`expedienteNro`,`descripcion`,`Oficina_idOficina_Origen`,`Oficina_idOficina_Destino`,`libro`,`folio`,`expedienteCausa`,`expedientePlazo`,`TipoExpediente_idTipoExpediente`,`Expediente_idExpedienteEstado`,`Expediente_FechaLlegada`,`Expediente_FechaEnvio`) "
+                +"(`idExpediente`,`expedienteNro`,`descripcion`,`Oficina_idOficina_Origen`,`Oficina_idOficina_Destino`,`libro`,`folio`,`expedienteCausa`,`expedientePlazo`,`TipoExpediente_idTipoExpediente`,`Expediente_idExpedienteEstado`,`Expediente_FechaLlegada`,`Expediente_FechaEnvio`,`Empleado_idEmpleado`) "
                 + "VALUES (NULL,"
                 + "'"+expediente.getNroExpediente()+"',"
                 + "'"+expediente.getDescripcion()+"',"
@@ -62,7 +62,7 @@ public class BDAltaExpediente {
                 + expediente.getTipoexpediente().getId()+","
                 + 1+","
                 + "NOW(),NULL"
-                +")";
+                +","+expediente.getResponsable().getId()+")";
         
         
         System.out.println(consulta);
@@ -84,10 +84,10 @@ public class BDAltaExpediente {
         
         for(int i=0;i<elementos.size();i++){
            String consultaAltaExpediente = "INSERT INTO `elemento` "
-                +"(`idElemento`,`descripcion`,`cantidad`,`TipoElemento_idTipoElemento`) "
+                +"(`idElemento`,`descripcion`,`TipoElemento_idTipoElemento`) "
                 + "VALUES (NULL,"
                 +"'"+elementos.get(i).getDescripcion()+"',"
-                +"'"+elementos.get(i).getCantidad()+","
+                
                 +elementos.get(i).getTipoElemento().getId()+")";
             
             PreparedStatement st = this.con.getConexion().prepareStatement(consultaAltaExpediente);

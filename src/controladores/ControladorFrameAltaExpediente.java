@@ -144,7 +144,6 @@ public class ControladorFrameAltaExpediente implements ActionListener{
         rsListaEmpleados = new BDMostrarListaEmpleados(this.con);
         
         ResultSet rs = rsListaEmpleados.RSListaEmpleados();
-        // public Empleado(Integer legajo, String nombre, String apellido, Integer dni, String fechaNac, String direccion, String rango) {
     
         while(rs.next()){
             Persona persona = rsListaEmpleados.obtenerPersona(rs.getInt("Persona_idPersona"));
@@ -217,13 +216,13 @@ public class ControladorFrameAltaExpediente implements ActionListener{
                Integer idTipoElemento = vistaaltaexpediente.getComboTipoElementosSecuestro().getId();
                String descTipoElemento = vistaaltaexpediente.getTextoDescSecuestro();
                String tipoElemento = vistaaltaexpediente.getComboTipoElementosSecuestro().getDescripcion();
-               String cantidad = String.valueOf(vistaaltaexpediente.getSpinnerCantidadElementos());
+               
          
                registroTablaElementos[0] = String.valueOf(cantidadElementos++);
                registroTablaElementos[1] = tipoElemento;
-               registroTablaElementos[2] = cantidad;
-               registroTablaElementos[3] = descTipoElemento;
-               registroTablaElementos[4] = String.valueOf(idTipoElemento);
+               
+               registroTablaElementos[2] = descTipoElemento;
+               registroTablaElementos[3] = String.valueOf(idTipoElemento);
                   
                modelo.addRow(registroTablaElementos);
         }
@@ -231,7 +230,7 @@ public class ControladorFrameAltaExpediente implements ActionListener{
         public void modelarTablaElementos(JTable jtableElementos){
             
                String titulos[] = {
-                 "nro","Tipo Elemento","Cantidad","Descripción","idElemento"  
+                 "nro","Tipo Elemento","Descripción","idElemento"  
                };
                modeloTablaElementos.setColumnIdentifiers(titulos);
                jtableElementos.setModel(modeloTablaElementos);
@@ -239,7 +238,7 @@ public class ControladorFrameAltaExpediente implements ActionListener{
         
         public void modelarTablaTramites(JTable jtableTramites){
             String titulos[] = {
-                "idTipoTramite","Tipo Tramite","Descripcion Tramite","idEmpleado","Nombre empleado"
+                "idTipoTramite","Tipo Tramite","Descripcion Tramite"
             };
            
             modeloTablaTramites.setColumnIdentifiers(titulos);
@@ -250,12 +249,10 @@ public class ControladorFrameAltaExpediente implements ActionListener{
             
             TipoTramite tipoTramite = vistaaltaexpediente.getComboTipoTramite();
             String descripcionTramite = vistaaltaexpediente.getTextoDescripcionTramite();
-            Empleado empleado = vistaaltaexpediente.getComboResponsable();
+            
             registroTablaTramites[0] = String.valueOf(tipoTramite.getId());
             registroTablaTramites[1] = tipoTramite.getDescripcion();
             registroTablaTramites[2] = descripcionTramite;
-            registroTablaTramites[3] = String.valueOf(empleado.getId());
-            registroTablaTramites[4] = empleado.toString();
             
             
             modelo.addRow(registroTablaTramites); 
@@ -268,7 +265,7 @@ public class ControladorFrameAltaExpediente implements ActionListener{
             
             this.con.conectar();
             
-            
+            Empleado empleado = vistaaltaexpediente.getComboResponsable();
             String nroExpediente = vistaaltaexpediente.getTextoNroExpediente();
             String descripcion = vistaaltaexpediente.getTextoDescripcionExpediente();
             Oficina oficinaOrigen = vistaaltaexpediente.getComboOrigenOficina();
@@ -285,7 +282,7 @@ public class ControladorFrameAltaExpediente implements ActionListener{
             ArrayList<Tramite> tramites = new ArrayList<Tramite>();
             tramites = this.obtenerTramitesTabla();
             
-            Expediente expe = new Expediente(nroExpediente,tipoExpediente,descripcion,elementos,tramites,libro,folio,plazo,causa,oficinaOrigen,oficinaDestino);
+            Expediente expe = new Expediente(nroExpediente,tipoExpediente,descripcion,elementos,tramites,libro,folio,plazo,causa,oficinaOrigen,oficinaDestino,empleado);
             BDaltaexpediente.altaExpediente(expe);
             
             ultimoidexpediente = BDaltaexpediente.obtenerUltimoExpedienteAgregadoSesion();
@@ -343,14 +340,12 @@ public class ControladorFrameAltaExpediente implements ActionListener{
             for(int i=0; i<rows; i++){
                 
                     
-                    Integer id = Integer.parseInt((String) tableModel.getValueAt(i, 4));
-                    String descripcion = (String) tableModel.getValueAt(i, 3);
+                    Integer id = Integer.parseInt((String) tableModel.getValueAt(i, 3));
+                    String descripcion = (String) tableModel.getValueAt(i, 2);
                     TipoElemento tipo = BDaltaexpediente.obtenerTipoElemento(id);
-                    Integer cantidad =  Integer.parseInt((String) tableModel.getValueAt(i, 2));
-                    Elemento elemento = new Elemento(descripcion,tipo,cantidad);
+                    Elemento elemento = new Elemento(descripcion,tipo);
                     elementos.add(elemento);
-   
-                
+      
             }
             
             return elementos;
@@ -374,12 +369,12 @@ public class ControladorFrameAltaExpediente implements ActionListener{
                     Integer idTipoTramite = Integer.parseInt((String) tableModel.getValueAt(i,0));
                     String descTipoTramite = (String) tableModel.getValueAt(i,1);
                     String descTramite = (String) tableModel.getValueAt(i, 2);
-                    Integer idEmpleado = Integer.parseInt((String) tableModel.getValueAt(i, 3));
+                    
                     TipoTramite tipo = new TipoTramite(idTipoTramite, descTipoTramite); 
-                    System.out.println("id en el metodo obtener Tramites Tabla es " + idEmpleado);
-                    empleado = bdobtenerempleado.obtenerEmpleado(idEmpleado);
-                    System.out.println("id en el metodo obtener" + empleado.toString());
-                    Tramite tramite = new Tramite(tipo, descTramite,empleado,1);
+                   
+                    
+                  
+                    Tramite tramite = new Tramite(tipo, descTramite,1);
                     //public Tramite(TipoTramite tipotramite,String descripcion,Empleado empleado,String estado) {
                     tramites.add(tramite);
 

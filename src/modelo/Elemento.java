@@ -9,15 +9,15 @@ public class Elemento {
     private Integer id;
     private String descripcion;
     private TipoElemento tipoElemento;
-    private Integer cantidad;
+   
     
    
 
-    public Elemento(String descripcion, TipoElemento tipoElemento,Integer cantidad) {
+    public Elemento(String descripcion, TipoElemento tipoElemento) {
         this.id = id;
         this.descripcion = descripcion;
         this.tipoElemento = tipoElemento;
-        this.cantidad = cantidad;
+        
         
     }
 
@@ -46,13 +46,9 @@ public class Elemento {
         return descripcion;
     }
 
-    public Integer getCantidad() {
-        return cantidad;
-    }
+    
 
-    public void setCantidad(Integer cantidad) {
-        this.cantidad = cantidad;
-    }
+    
     
     public String toString(){
         return descripcion;

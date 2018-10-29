@@ -8,13 +8,13 @@ package modelo;
 public class Tramite {
     private TipoTramite tipotramite;
     private String descripcion;
-    private Empleado empleado;
+    
     private Integer estado;
 
-    public Tramite(TipoTramite tipotramite,String descripcion,Empleado empleado,Integer estado) {
+    public Tramite(TipoTramite tipotramite,String descripcion,Integer estado) {
         this.tipotramite = tipotramite;
         this.descripcion = descripcion;
-        this.empleado = empleado;
+        
         this.estado = estado;
     }
 
@@ -26,9 +26,7 @@ public class Tramite {
         return descripcion;
     }
 
-    public Empleado getEmpleado() {
-        return empleado;
-    }
+    
 
     public Integer getEstado() {
         return estado;
@@ -42,9 +40,7 @@ public class Tramite {
         this.descripcion = descripcion;
     }
 
-    public void setEmpleado(Empleado empleado) {
-        this.empleado = empleado;
-    }
+   
 
     public void setEstado(Integer estado) {
         this.estado = estado;

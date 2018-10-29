@@ -25,11 +25,11 @@ public class BDAltaTramite {
        for(int i=0;i<tramites.size();i++){
            
            String consulta = "INSERT INTO `tramite` "
-                + "(`idTramite`,`TipoTramite_idTipoTramite`,`descripcion`,`Empleado_idEmpleado`,`Expediente_idExpediente`,`Estado_idEstado`) "
+                + "(`idTramite`,`TipoTramite_idTipoTramite`,`descripcion`,`Expediente_idExpediente`,`Estado_idEstado`) "
                 + "VALUES (NULL,"+tramites.get(i).getTipotramite().getId()
                 +",'"+tramites.get(i).getDescripcion()
-                +"',"+tramites.get(i).getEmpleado().getId()
-                +","+idExpediente
+               
+                +"',"+idExpediente
                 +","+tramites.get(i).getEstado()
                 +");";
         

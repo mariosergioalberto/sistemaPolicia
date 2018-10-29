@@ -25,13 +25,13 @@ public class BDAltaElementosExpediente {
         for(int i=0;i<elementos.size();i++){
             
             String consulta = "INSERT INTO `elemento`"
-                +"(`idElemento`,`descripcion`,`cantidad`,`TipoElemento_idTipoElemento`,`Expediente_idExpediente`)"
+                +"(`idElemento`,`descripcion`,`TipoElemento_idTipoElemento`,`Expediente_idExpediente`)"
                 + "VALUES (NULL,'"+elementos.get(i).getDescripcion()
-                + "'," +elementos.get(i).getCantidad()
-                + ","+elementos.get(i).getTipoElemento().getId()
+                
+                + "',"+elementos.get(i).getTipoElemento().getId()
                 + ","+idultimoexpediente
                 +");";
-            System.out.println(elementos.get(i).getTipoElemento().getId()+"---"+elementos.get(i).getDescripcion()+"---"+elementos.get(i).getCantidad()+"---"+idultimoexpediente);
+            System.out.println(elementos.get(i).getTipoElemento().getId()+"---"+elementos.get(i).getDescripcion()+"---"+idultimoexpediente);
             PreparedStatement st = this.con.getConexion().prepareStatement(consulta);
             st.execute();
         }

@@ -21,8 +21,9 @@ public class Expediente {
     private Integer folio;
     private Integer plazo;
     private String causa;
+    private Empleado responsable;
 
-    public Expediente(String numero,TipoExpediente tipoexpediente,String descripcion, ArrayList<Elemento> elementos, ArrayList<Tramite> tramites,Integer libro,Integer folio, Integer plazo,String causa,Oficina origenOficina,Oficina destinoOficina) {
+    public Expediente(String numero,TipoExpediente tipoexpediente,String descripcion, ArrayList<Elemento> elementos, ArrayList<Tramite> tramites,Integer libro,Integer folio, Integer plazo,String causa,Oficina origenOficina,Oficina destinoOficina,Empleado responsable) {
         this.numero = numero;
         this.tipoexpediente = tipoexpediente;
         this.libro = libro;
@@ -34,6 +35,15 @@ public class Expediente {
         this.causa = causa;
         this.origenOficina = origenOficina;
         this.destinoOficina = destinoOficina;
+        this.responsable = responsable;
+    }
+
+    public void setResponsable(Empleado responsable) {
+        this.responsable = responsable;
+    }
+
+    public Empleado getResponsable() {
+        return responsable;
     }
 
     public void setNumero(String numero) {
